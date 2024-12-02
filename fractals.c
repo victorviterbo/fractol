@@ -6,34 +6,38 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 14:06:40 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/11/26 19:01:10 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:23:50 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	madelbrot(int cr, int ci, int nsteps);
-int	**gen_map(char **map, int *dims, int nsteps, int (*f)(int, int, int));
+float	madelbrot(float cr, float ci, int nsteps);
+char	**gen_map(char **map, int *dims, int nsteps, int (*f)(int, int, int));
 
-int	madelbrot(int cr, int ci, int nsteps)
+float	madelbrot(float cr, float ci, int nsteps)
 {
-	int	i;
-	int	r0;
-	int	i0;
+	float	i;
+	float	r0;
+	float	i0;
+	float	r_temp;
 
 	i = 0;
 	r0 = 0;
 	i0 = 0;
-	while (i < nsteps && hypot(r0, i0) < 2)
+	while (i < nsteps && r0 * r0 + i0 * i0 < 4)
 	{
-		r0 = r0 * r0 - i0 * i0 + cr;
-		i0 = -2 * r0 * i0 + ci;
+		r_temp = r0 * r0 - i0 * i0 + cr;
+		i0 = 2 * r0 * i0 + ci;
+		r0 = r_temp;
 		i++;
 	}
-	return (i);
+	if (i == nsteps)
+		return (1);
+	return (cbrt(i / (float)nsteps));
 }
 
-int	**gen_map(char **map, int *dims, int nsteps, int (*f)(int, int, int))
+char	**gen_map(char **map, int *dims, int nsteps, int (*f)(int, int, int))
 {
 	int	i;
 	int	j;

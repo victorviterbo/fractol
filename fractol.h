@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:42 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/02 14:54:34 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/02 20:22:29 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,18 @@
 # define FRACTOL_H
 
 # include <math.h> 
-# include "minilibx_mms_20191025_beta/mlx.h"
+# include "minilibx/mlx.h"
 # include "libft/libft.h"
+
+
+
+
+#include <stdio.h>
+
+
+
+
+
 
 enum e_FRACTYPE {
 	MANDELBROT,
@@ -30,7 +40,15 @@ typedef struct	s_data {
 	int		endian;
 }	t_data;
 
-int	madelbrot(int cr, int ci, int nsteps);
-int	**gen_map(char **map, int *dims, int nsteps, int (*f)(int, int, int));
+typedef struct	s_coor {
+	double	x;
+	double	y;
+}	t_coor;
+
+void	img_data_fill(t_data *data, int x, int y, float color);
+float	madelbrot(float cr, float ci, int nsteps);
+char	**gen_map(char **map, int *dims, int nsteps, int (*f)(int, int, int));
+float	map_colors(float color);
+t_coor	map_pixel(t_coor xy, t_coor xymin, t_coor xymax, t_coor size);
 
 #endif

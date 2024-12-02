@@ -26,7 +26,7 @@ public class MlxMain {
       var loopHookTimer:CFRunLoopTimer?
       public var inLoop = false
 
-      set public (_ flag:Int = 0)
+      public init(_ flag:Int = 0)
       {
 	/// make app with top menubar
         myMlxApp = NSApplication.shared

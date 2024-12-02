@@ -37,15 +37,10 @@
 
 #ifndef MLX_H
 
-# define MLX_H
+#define	MLX_H
 
 
-struct s_col_name {
-	const char		*name;
-	unsigned int	color;
-};
-
-void		*mlx_init();
+void	*mlx_init();
 /*
 **  needed before everything else.
 **  return (void *)0 if failed
@@ -56,12 +51,12 @@ void		*mlx_init();
 ** Basic actions
 */
 
-void		*mlx_new_window(void *mlx_ptr, int size_x, int size_y, char *title);
+void	*mlx_new_window(void *mlx_ptr, int size_x, int size_y, char *title);
 /*
 **  return void *0 if failed
 */
-int			mlx_clear_window(void *mlx_ptr, void *win_ptr);
-int			mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
+int	mlx_clear_window(void *mlx_ptr, void *win_ptr);
+int	mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
 /*
 **  origin for x & y is top left corner of the window
 **  y down is positive
@@ -73,18 +68,18 @@ int			mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
 ** Image stuff
 */
 
-void		*mlx_new_image(void * mlx_ptr, int width, int height);
+void	*mlx_new_image(void *mlx_ptr,int width,int height);
 /*
 **  return void *0 if failed
 */
-char		*mlx_get_data_addr(void *img_ptr, int *bits_per_pixel,
-			int *size_line, int *endian);
+char	*mlx_get_data_addr(void *img_ptr, int *bits_per_pixel,
+			   int *size_line, int *endian);
 /*
 **  endian : 0 = graphical sever is little endian, 1 = big endian
 **  usefull in a network environment where graphical app show on a remote monitor that can have a different endian
 */
-int		mlx_put_image_to_window(void *mlx_ptr, void *win_ptr, void *img_ptr,
-			int x, int y);
+int	mlx_put_image_to_window(void *mlx_ptr, void *win_ptr, void *img_ptr,
+				int x, int y);
 unsigned int	mlx_get_color_value(void *mlx_ptr, int color);
 
 
