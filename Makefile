@@ -6,13 +6,13 @@
 #    By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/01 12:45:22 by vviterbo          #+#    #+#              #
-#    Updated: 2024/12/02 15:56:38 by vviterbo         ###   ########.fr        #
+#    Updated: 2024/12/03 00:15:12 by vviterbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
-SRCS = main.c fractals.c
+SRCS = main.c fractals.c pt2pxl.c
 
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 

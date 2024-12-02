@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:42 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/02 20:22:29 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/03 00:17:24 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,15 @@ typedef struct	s_data {
 }	t_data;
 
 typedef struct	s_coor {
-	double	x;
-	double	y;
+	float	x;
+	float	y;
 }	t_coor;
 
 void	img_data_fill(t_data *data, int x, int y, float color);
-float	madelbrot(float cr, float ci, int nsteps);
+float	map_colors(float color);
+float	madelbrot(t_coor xy, int nsteps);;
 char	**gen_map(char **map, int *dims, int nsteps, int (*f)(int, int, int));
 float	map_colors(float color);
-t_coor	map_pixel(t_coor xy, t_coor xymin, t_coor xymax, t_coor size);
+t_coor	pxl2pt(t_coor xy, t_coor xymin, t_coor xymax, t_coor size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:56:06 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/02 19:10:09 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/03 00:29:06 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,36 @@ float	map_colors(float color);
 
 int main(void)
 {
-	int		i;
-	int		j;
+	t_coor	current;
 	void	*mlx;
 	t_data	img;
 	void	*window;
-	int		*dims;
 	int		nsteps;
-	float	scale;
+	t_coor	min;
+	t_coor	max;
+	t_coor	window_size;
 
 	mlx = mlx_init();
-	dims = ft_calloc(4, sizeof(int));
-	dims[0] = -2560 / 8;
-	dims[1] = -1600 / 8;
-	dims[2] = 2560 / 8;
-	dims[3] = 1600 / 8;
-	window = mlx_new_window(mlx, dims[2] - dims[0], dims[3] - dims[1], "Mandelbrot");
-	img.img = mlx_new_image(mlx, dims[2] - dims[0], dims[3] - dims[1]);
+	min.x = -2;
+	min.y = -1;
+	max.x = 2;
+	max.y = 1;
+	window_size.x = 2560 / 4;
+	window_size.y = 1600 / 4;
+	window = mlx_new_window(mlx, window_size.x, window_size.y, "Mandelbrot");
+	img.img = mlx_new_image(mlx, window_size.x, window_size.y);
 	nsteps = 250;
-	scale = 200;
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	i = 0;
-	while (i < dims[2] - dims[0])
+	current.x = 0;
+	while (current.x < window_size.x)
 	{
-		j = 0;
-		while (j < dims[3] - dims[1])
+		current.y = 0;
+		while (current.y < window_size.y)
 		{
-			img_data_fill(&img, i, j, madelbrot((float)(i + dims[0])/(scale), (float)(j + dims[1])/(scale), nsteps));
-			j++;
+			img_data_fill(&img, current.x, current.y, madelbrot(pxl2pt(current, min, max, window_size), nsteps));
+			current.y++;
 		}
-		i++;
+		current.x++;
 	}
 	mlx_put_image_to_window(mlx, window, img.img, 0, 0);
 	mlx_loop(mlx);

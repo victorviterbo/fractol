@@ -6,16 +6,16 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 14:06:40 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/02 19:23:50 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/03 00:27:53 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-float	madelbrot(float cr, float ci, int nsteps);
+float	madelbrot(t_coor xy, int nsteps);
 char	**gen_map(char **map, int *dims, int nsteps, int (*f)(int, int, int));
 
-float	madelbrot(float cr, float ci, int nsteps)
+float	madelbrot(t_coor xy, int nsteps)
 {
 	float	i;
 	float	r0;
@@ -27,8 +27,8 @@ float	madelbrot(float cr, float ci, int nsteps)
 	i0 = 0;
 	while (i < nsteps && r0 * r0 + i0 * i0 < 4)
 	{
-		r_temp = r0 * r0 - i0 * i0 + cr;
-		i0 = 2 * r0 * i0 + ci;
+		r_temp = r0 * r0 - i0 * i0 + xy.x;
+		i0 = 2 * r0 * i0 + xy.y;
 		r0 = r_temp;
 		i++;
 	}
