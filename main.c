@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:56:06 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/03 14:35:56 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/03 16:01:50 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,18 @@ t_params	*parse_params(char *argv[]);
 int main(int argc, char *argv[])
 {
 	t_imx		*mlx_obj;
-	t_data		*img;
-	t_params	*params;
 
 	(void)argc;
-	params = parse_params(argv);
 	mlx_obj = ft_calloc(1, sizeof(t_imx));
-	mlx_obj->curr_img = ft_calloc(1, sizeof(t_data));
-	mlx_obj->next_img = ft_calloc(1, sizeof(t_data));
-	mlx_obj->params = params;
 	mlx_obj->mlx = mlx_init();
-	mlx_obj->win = mlx_new_window(mlx_obj->mlx, params->window_size.x, params->window_size.y, "Mandelbrot");
-	img->img = mlx_new_image(mlx_obj->mlx, params->window_size.x, params->window_size.y);
-	mlx_obj->curr_img = &img;
-	fill_img(mlx_obj, params);
-	mlx_put_image_to_window(mlx_obj->mlx, mlx_obj->win, img->img, 0, 0);
+	mlx_obj->params = parse_params(argv);
+	mlx_obj->curr_img = ft_calloc(1, sizeof(t_data));
+	mlx_obj->curr_img->img = mlx_new_image(mlx_obj->mlx, mlx_obj->params->window_size.x, mlx_obj->params->window_size.y);
+	mlx_obj->next_img = ft_calloc(1, sizeof(t_data));
+	mlx_obj->next_img->img = mlx_new_image(mlx_obj->mlx, mlx_obj->params->window_size.x, mlx_obj->params->window_size.y);
+	mlx_obj->win = mlx_new_window(mlx_obj->mlx, mlx_obj->params->window_size.x, mlx_obj->params->window_size.y, "Mandelbrot");
+	fill_img(mlx_obj, mlx_obj->params);
+	mlx_put_image_to_window(mlx_obj->mlx, mlx_obj->win, mlx_obj->next_img->img, 0, 0);
 	set_hooks(mlx_obj);
 	mlx_loop(mlx_obj->mlx);
 }
@@ -54,14 +51,14 @@ void	fill_img(t_imx *mlx_obj, t_params *params)
 		current.y = 0;
 		while (current.y < params->window_size.y)
 		{
-			img_data_fill(&img, current.x, current.y, madelbrot(pxl2pt(current, params), params->nsteps));
+			color = madelbrot(pxl2pt(current, params), params->nsteps);
 			dst = img->addr + (int)(current.y * img->line_length + current.x * (img->bits_per_pixel / 8));
 			*(unsigned int *)dst = map_colors(color);
 			current.y++;
 		}
 		current.x++;
 	}
-	return (img);
+	return ;
 }
 
 void	img_data_fill(t_data *data, int x, int y, float color)
