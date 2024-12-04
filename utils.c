@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:10:02 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/04 13:04:49 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:42:15 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,10 @@ void	update_range_zoom(t_imx *data, int mousecode, t_coor mouse)
 {
 	float	scale;
 
+	scale = 1;
 	if (mousecode == ZOOM_IN)
 		scale = ZOOM_SCALE;
-	else
+	else if (mousecode == ZOOM_OUT)
 		scale = 1 / ZOOM_SCALE;
 	data->params->min = scale_vector(mouse, data->params->min, scale);
 	data->params->max = scale_vector(mouse, data->params->max, scale);

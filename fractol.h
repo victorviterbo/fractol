@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:42 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/04 13:15:43 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/04 22:30:35 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ enum e_FRACTYPE {
 	JULIA
 };
 
-typedef struct	s_data {
+typedef struct s_data {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -57,22 +57,21 @@ typedef struct	s_data {
 	int		endian;
 }	t_data;
 
-typedef struct	s_coor {
-	float	x;
-	float	y;
+typedef struct s_coor {
+	double	x;
+	double	y;
 }	t_coor;
 
-typedef struct	s_params {
+typedef struct s_params {
 	t_coor	window_size;
 	t_coor	min;
 	t_coor	max;
 	int		nsteps;
 	int		ft;
-	float	cr;
-	float	ci;
+	t_coor	c0;
 }	t_params;
 
-typedef struct	s_imx {
+typedef struct s_imx {
 	void		*mlx;
 	void		*win;
 	t_params	*params;
@@ -81,21 +80,22 @@ typedef struct	s_imx {
 }	t_imx;
 
 //main.c
-void		img_data_fill(t_data *data, int x, int y, float color);
-float		map_colors(float color);
+void		img_data_fill(t_data *data, int x, int y, double color);
+double		map_colors(double color);
 void		fill_img(t_imx *data, t_params *params);
 t_params	*parse_params(char *argv[]);
 //fractals.c
-float		madelbrot(t_coor xy, int nsteps);
+double		madelbrot(t_coor xy, int nsteps);
+double		julia(t_coor xy, t_coor c, int nsteps);
 //hooks.c
-void	set_hooks(t_imx *data);
-int		key_hook(int keycode, t_imx *data);
-int		mouse_hook(int mousecode, int x, int y, t_imx *data);
+void		set_hooks(t_imx *data);
+int			key_hook(int keycode, t_imx *data);
+int			mouse_hook(int mousecode, int x, int y, t_imx *data);
 //utils.c
-t_coor	scale_vector(t_coor base, t_coor tip, float scale);
-t_coor	pxl2pt(t_coor xy, t_params *params);
-void	update_range_shift(t_imx *data, int dir);
-int		free_all(t_imx *data);
-void	update_range_zoom(t_imx *data, int mousecode, t_coor mouse);
+t_coor		scale_vector(t_coor base, t_coor tip, float scale);
+t_coor		pxl2pt(t_coor xy, t_params *params);
+void		update_range_shift(t_imx *data, int dir);
+int			free_all(t_imx *data);
+void		update_range_zoom(t_imx *data, int mousecode, t_coor mouse);
 
 #endif

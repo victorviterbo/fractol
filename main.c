@@ -6,14 +6,13 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:56:06 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/04 13:23:30 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/04 22:42:53 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void		img_data_fill(t_data *data, int x, int y, float color);
-float		map_colors(float color);
+double		map_colors(double color);
 void		fill_img(t_imx *data, t_params *params);
 t_params	*parse_params(char *argv[]);
 
@@ -42,24 +41,26 @@ void	fill_img(t_imx *data, t_params *params)
 {
 	t_data	*img;
 	t_coor	current;
-	t_coor	delta;
 	char	*dst;
-	float	color;
+	double	color;
 
 	img = data->next_img;
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
 	current.x = 0;
-	printf("RECOMPUTING...\n");
 	current.y = 0;
-	delta.x = 1;
-	delta.y = 1;
-	printf("pixel size = %f, %f", pxl2pt(delta, params).x - pxl2pt(current, params).x, pxl2pt(delta, params).y - pxl2pt(current, params).y);
 	while (current.x < params->window_size.x)
 	{
 		current.y = 0;
+		if ((int)current.x % 100 == 0)
+			printf("Computing line %i\n", (int)current.x);
 		while (current.y < params->window_size.y)
 		{
-			color = madelbrot(pxl2pt(current, params), params->nsteps);
+			if (params->ft == MANDELBROT)
+				color = madelbrot(pxl2pt(current, params), params->nsteps);
+			else if (params->ft == JULIA)
+				color = julia(pxl2pt(current, params), params->c0,
+					params->nsteps);
 			dst = img->addr + (int)(current.y * img->line_length + current.x * (img->bits_per_pixel / 8));
 			*(unsigned int *)dst = map_colors(color);
 			current.y++;
@@ -69,16 +70,7 @@ void	fill_img(t_imx *data, t_params *params)
 	return ;
 }
 
-void	img_data_fill(t_data *data, int x, int y, float color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = map_colors(color);
-	return ;
-}
-
-float	map_colors(float color)
+double	map_colors(double color)
 {
 	int	r;
 	int	g;
@@ -113,8 +105,8 @@ t_params	*parse_params(char *argv[])
 	offset = 2 * (params->ft == JULIA);
 	if (params->ft == JULIA)
 	{
-		params->cr = ft_atoi(argv[2]);
-		params->ci = ft_atoi(argv[3]);
+		params->c0.x = (double)ft_atof(argv[2]);
+		params->c0.y = (double)ft_atof(argv[3]);
 	}
 	params->nsteps = ft_atoi(argv[offset + 2]);
 	params->window_size.x = ft_atoi(argv[offset + 3]);

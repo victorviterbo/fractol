@@ -6,20 +6,21 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 14:06:40 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/03 12:05:11 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/04 22:39:44 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-float	madelbrot(t_coor xy, int nsteps);
+double	madelbrot(t_coor xy, int nsteps);
+double	julia(t_coor xy, t_coor c, int nsteps);
 
-float	madelbrot(t_coor xy, int nsteps)
+double	madelbrot(t_coor xy, int nsteps)
 {
-	float	i;
-	float	r0;
-	float	i0;
-	float	r_temp;
+	double	i;
+	double	r0;
+	double	i0;
+	double	r_temp;
 
 	i = 0;
 	r0 = 0;
@@ -33,5 +34,23 @@ float	madelbrot(t_coor xy, int nsteps)
 	}
 	if (i == nsteps)
 		return (1);
-	return (cbrt(i / (float)nsteps));
+	return (i / (double)nsteps);
+}
+
+double	julia(t_coor xy, t_coor c, int nsteps)
+{
+	double	i;
+	double	r_temp;
+
+	i = 0;
+	while (i < nsteps && xy.x * xy.x + xy.y * xy.y < 4)
+	{
+		r_temp = xy.x * xy.x - xy.y * xy.y + c.x;
+		xy.y = 2 * xy.x * xy.y + c.y;
+		xy.x = r_temp;
+		i++;
+	}
+	if (i == nsteps)
+		return (1);
+	return (i / (double)nsteps);
 }

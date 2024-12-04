@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:10:13 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/04 13:04:23 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/04 14:32:38 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,10 @@
 void	set_hooks(t_imx *data);
 int		key_hook(int keycode, t_imx *data);
 int		mouse_hook(int mousecode, int x, int y, t_imx *data);
-int		do_nothing(void);
 
-int	do_nothing(void)
-{
-	return (0);
-}
 
 void	set_hooks(t_imx *data)
 {
-	mlx_loop_hook(data->mlx, &do_nothing, data);
 	mlx_key_hook(data->win, key_hook, data);
 	mlx_mouse_hook(data->win, mouse_hook, data);
 	mlx_hook(data->win, 17, 0, free_all, data);
@@ -41,7 +35,7 @@ int	key_hook(int keycode, t_imx *data)
 	if (keycode == DOWN_ARROW)
 		update_range_shift(data, 3);
 	if (keycode == ESC)
-		mlx_destroy_window(data->mlx, data->win);//free_all(data);
+		mlx_destroy_window(data->mlx, data->win);
 	fill_img(data, data->params);
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->next_img->img, 0, 0);
