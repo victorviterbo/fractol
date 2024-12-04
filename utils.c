@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:10:02 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/04 09:03:44 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:04:49 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_coor	scale_vector(t_coor base, t_coor tip, float scale);
 t_coor	pxl2pt(t_coor xy, t_params *params);
-void	update_range_shift(t_imx *mlx_obj, int dir);
-int		close_free_all(t_imx *mlx_obj);
-void	update_range_zoom(t_imx *mlx_obj, int mousecode, t_coor mouse);
+void	update_range_shift(t_imx *data, int dir);
+int		free_all(t_imx *data);
+void	update_range_zoom(t_imx *data, int mousecode, t_coor mouse);
 
 t_coor	scale_vector(t_coor base, t_coor tip, float scale)
 {
@@ -36,42 +36,40 @@ t_coor	pxl2pt(t_coor xy, t_params *params)
 	return (xy);
 }
 
-void	update_range_shift(t_imx *mlx_obj, int dir)
+void	update_range_shift(t_imx *data, int dir)
 {
 	t_coor	min;
 	t_coor	max;
 
-	min = mlx_obj->params->min;
-	max = mlx_obj->params->max;
+	min = data->params->min;
+	max = data->params->max;
 	if (dir < 2)
 	{
 		dir = 2 * dir - 1;
-		mlx_obj->params->min.x = min.x + dir * ARROW_SCALE * (max.x - min.x);
-		mlx_obj->params->max.x = max.x + dir * ARROW_SCALE * (max.x - min.x);
+		data->params->min.x = min.x + dir * ARROW_SCALE * (max.x - min.x);
+		data->params->max.x = max.x + dir * ARROW_SCALE * (max.x - min.x);
 	}
 	else
 	{
 		dir = 2 * (dir - 2) - 1;
-		mlx_obj->params->min.y = min.y + dir * ARROW_SCALE * (max.y - min.y);
-		mlx_obj->params->max.y = max.y + dir * ARROW_SCALE * (max.y - min.y);
+		data->params->min.y = min.y + dir * ARROW_SCALE * (max.y - min.y);
+		data->params->max.y = max.y + dir * ARROW_SCALE * (max.y - min.y);
 	}
 	return ;
 }
 
-int	close_free_all(t_imx *mlx_obj)
+int	free_all(t_imx *data)
 {
-	mlx_destroy_image(mlx_obj->mlx, mlx_obj->curr_img->img);
-	mlx_destroy_image(mlx_obj->mlx, mlx_obj->next_img->img);
-	free(mlx_obj->curr_img);
-	free(mlx_obj->next_img);
-	free(mlx_obj->params);
-	mlx_destroy_window(mlx_obj->mlx, mlx_obj->win);
-	free(mlx_obj);
+	mlx_destroy_image(data->mlx, data->curr_img->img);
+	mlx_destroy_image(data->mlx, data->next_img->img);
+	free(data->curr_img);
+	free(data->next_img);
+	free(data->params);
 	exit(0);
 }
 
 
-void	update_range_zoom(t_imx *mlx_obj, int mousecode, t_coor mouse)
+void	update_range_zoom(t_imx *data, int mousecode, t_coor mouse)
 {
 	float	scale;
 
@@ -79,7 +77,7 @@ void	update_range_zoom(t_imx *mlx_obj, int mousecode, t_coor mouse)
 		scale = ZOOM_SCALE;
 	else
 		scale = 1 / ZOOM_SCALE;
-	mlx_obj->params->min = scale_vector(mouse, mlx_obj->params->min, scale);
-	mlx_obj->params->max = scale_vector(mouse, mlx_obj->params->max, scale);
+	data->params->min = scale_vector(mouse, data->params->min, scale);
+	data->params->max = scale_vector(mouse, data->params->max, scale);
 	return ;
 }

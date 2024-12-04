@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:42 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/03 18:05:54 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:15:43 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct	s_params {
 	t_coor	max;
 	int		nsteps;
 	int		ft;
+	float	cr;
+	float	ci;
 }	t_params;
 
 typedef struct	s_imx {
@@ -81,19 +83,19 @@ typedef struct	s_imx {
 //main.c
 void		img_data_fill(t_data *data, int x, int y, float color);
 float		map_colors(float color);
-void		fill_img(t_imx *mlx_obj, t_params *params);
+void		fill_img(t_imx *data, t_params *params);
 t_params	*parse_params(char *argv[]);
 //fractals.c
 float		madelbrot(t_coor xy, int nsteps);
 //hooks.c
-void	set_hooks(t_imx *mlx_obj);
-int		key_hook(int keycode, t_imx *mlx_obj);
-int		mouse_hook(int mousecode, int x, int y, t_imx *mlx_obj);
+void	set_hooks(t_imx *data);
+int		key_hook(int keycode, t_imx *data);
+int		mouse_hook(int mousecode, int x, int y, t_imx *data);
 //utils.c
 t_coor	scale_vector(t_coor base, t_coor tip, float scale);
 t_coor	pxl2pt(t_coor xy, t_params *params);
-void	update_range_shift(t_imx *mlx_obj, int dir);
-int		close_free_all(t_imx *mlx_obj);
-void	update_range_zoom(t_imx *mlx_obj, int mousecode, t_coor mouse);
+void	update_range_shift(t_imx *data, int dir);
+int		free_all(t_imx *data);
+void	update_range_zoom(t_imx *data, int mousecode, t_coor mouse);
 
 #endif

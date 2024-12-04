@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:56:06 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/03 16:01:50 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:23:30 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,46 @@
 
 void		img_data_fill(t_data *data, int x, int y, float color);
 float		map_colors(float color);
-void		fill_img(t_imx *mlx_obj, t_params *params);
+void		fill_img(t_imx *data, t_params *params);
 t_params	*parse_params(char *argv[]);
 
 int main(int argc, char *argv[])
 {
-	t_imx		*mlx_obj;
+	t_imx		*data;
 
 	(void)argc;
-	mlx_obj = ft_calloc(1, sizeof(t_imx));
-	mlx_obj->mlx = mlx_init();
-	mlx_obj->params = parse_params(argv);
-	mlx_obj->curr_img = ft_calloc(1, sizeof(t_data));
-	mlx_obj->curr_img->img = mlx_new_image(mlx_obj->mlx, mlx_obj->params->window_size.x, mlx_obj->params->window_size.y);
-	mlx_obj->next_img = ft_calloc(1, sizeof(t_data));
-	mlx_obj->next_img->img = mlx_new_image(mlx_obj->mlx, mlx_obj->params->window_size.x, mlx_obj->params->window_size.y);
-	mlx_obj->win = mlx_new_window(mlx_obj->mlx, mlx_obj->params->window_size.x, mlx_obj->params->window_size.y, "Mandelbrot");
-	fill_img(mlx_obj, mlx_obj->params);
-	mlx_put_image_to_window(mlx_obj->mlx, mlx_obj->win, mlx_obj->next_img->img, 0, 0);
-	set_hooks(mlx_obj);
-	mlx_loop(mlx_obj->mlx);
+	data = ft_calloc(1, sizeof(t_imx));
+	data->mlx = mlx_init();
+	data->params = parse_params(argv);
+	data->curr_img = ft_calloc(1, sizeof(t_data));
+	data->curr_img->img = mlx_new_image(data->mlx, data->params->window_size.x, data->params->window_size.y);
+	data->next_img = ft_calloc(1, sizeof(t_data));
+	data->next_img->img = mlx_new_image(data->mlx, data->params->window_size.x, data->params->window_size.y);
+	data->win = mlx_new_window(data->mlx, data->params->window_size.x, data->params->window_size.y, "Mandelbrot");
+	fill_img(data, data->params);
+	mlx_put_image_to_window(data->mlx, data->win, data->next_img->img, 0, 0);
+	set_hooks(data);
+	mlx_loop(data->mlx);
+	free(data);
+	return (0);
 }
 
-void	fill_img(t_imx *mlx_obj, t_params *params)
+void	fill_img(t_imx *data, t_params *params)
 {
 	t_data	*img;
 	t_coor	current;
+	t_coor	delta;
 	char	*dst;
 	float	color;
 
-	img = mlx_obj->next_img;
+	img = data->next_img;
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
 	current.x = 0;
+	printf("RECOMPUTING...\n");
+	current.y = 0;
+	delta.x = 1;
+	delta.y = 1;
+	printf("pixel size = %f, %f", pxl2pt(delta, params).x - pxl2pt(current, params).x, pxl2pt(delta, params).y - pxl2pt(current, params).y);
 	while (current.x < params->window_size.x)
 	{
 		current.y = 0;
@@ -95,24 +103,31 @@ float	map_colors(float color)
 t_params	*parse_params(char *argv[])
 {
 	t_params	*params;
+	int			offset;
 
 	params = ft_calloc(1, sizeof(t_params));
 	if (ft_strncmp(argv[1], "MANDELBROT", ft_max(ft_strlen(argv[1]), 11)) == 0)
 		params->ft = MANDELBROT;
 	else if (ft_strncmp(argv[1], "JULIA", ft_max(ft_strlen(argv[1]), 6)) == 0)
 		params->ft = JULIA;
-	params->nsteps = ft_atoi(argv[2]);
-	params->window_size.x = ft_atoi(argv[3]);
-	params->window_size.y = ft_atoi(argv[4]);
-	params->min.x = ft_atoi(argv[5]);
-	params->min.y = ft_atoi(argv[6]);
-	if (ft_atoi(argv[7]) != '*')
-		params->max.x = ft_atoi(argv[7]);
+	offset = 2 * (params->ft == JULIA);
+	if (params->ft == JULIA)
+	{
+		params->cr = ft_atoi(argv[2]);
+		params->ci = ft_atoi(argv[3]);
+	}
+	params->nsteps = ft_atoi(argv[offset + 2]);
+	params->window_size.x = ft_atoi(argv[offset + 3]);
+	params->window_size.y = ft_atoi(argv[offset + 4]);
+	params->min.x = ft_atoi(argv[offset + 5]);
+	params->min.y = ft_atoi(argv[offset + 6]);
+	if (ft_atoi(argv[offset + 7]) != '*')
+		params->max.x = ft_atoi(argv[offset + 7]);
 	else
-		params->max.x = ft_atoi(argv[8]) * params->window_size.x / params->window_size.y;
-	if (ft_atoi(argv[8]) != '*')
-		params->max.y = ft_atoi(argv[8]);
+		params->max.x = ft_atoi(argv[offset + 8]) * params->window_size.x / params->window_size.y;
+	if (ft_atoi(argv[offset + 8]) != '*')
+		params->max.y = ft_atoi(argv[offset + 8]);
 	else
-		params->max.y = ft_atoi(argv[7]) * params->window_size.y / params->window_size.x;
+		params->max.y = ft_atoi(argv[offset + 7]) * params->window_size.y / params->window_size.x;
 	return (params);
 }
