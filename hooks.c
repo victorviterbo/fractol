@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:10:13 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/03 17:30:51 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/04 09:02:23 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	mouse_hook(int mousecode, int x, int y, t_imx *mlx_obj)
 	t_coor	mouse;
 
 	mlx_mouse_get_pos(mlx_obj->win, &x, &y);
-	mouse.x = x * (mlx_obj->params->max.x - mlx_obj->params->min.x)/ mlx_obj->params->window_size.x;
-	mouse.y = y * (mlx_obj->params->max.y - mlx_obj->params->min.y)/ mlx_obj->params->window_size.y;
+	mouse.x = x * (mlx_obj->params->max.x - mlx_obj->params->min.x) / mlx_obj->params->window_size.x + mlx_obj->params->min.x;
+	mouse.y = y * (mlx_obj->params->max.y - mlx_obj->params->min.y) / mlx_obj->params->window_size.y + mlx_obj->params->min.y;
 	update_range_zoom(mlx_obj, mousecode, mouse);
 	fill_img(mlx_obj, mlx_obj->params);
 	mlx_put_image_to_window(mlx_obj->mlx, mlx_obj->win, mlx_obj->next_img->img, 0, 0);
