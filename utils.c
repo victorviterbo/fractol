@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:10:02 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/04 08:50:07 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/04 09:03:44 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,20 +75,11 @@ void	update_range_zoom(t_imx *mlx_obj, int mousecode, t_coor mouse)
 {
 	float	scale;
 
-	printf("mousecode = %i\n", mousecode);
 	if (mousecode == ZOOM_IN)
 		scale = ZOOM_SCALE;
 	else
 		scale = 1 / ZOOM_SCALE;
-	printf("scale = %f", scale);
-	printf("init dimmenssions : %f, %f, %f, %f; mouse = %f, %f\n", mlx_obj->params->min.x, mlx_obj->params->min.y, mlx_obj->params->max.x, mlx_obj->params->max.y, mouse.x, mouse.y);
-	printf("old diagonal = %f\n", hypot(mlx_obj->params->max.x - mlx_obj->params->min.x, mlx_obj->params->max.x - mlx_obj->params->min.x));
-	//mouse = scale_vector(mouse, mlx_obj->params->min, scale);
-	//tmp = scale_vector(mouse, mlx_obj->params->min, scale);
-	//mlx_obj->params->max = scale_vector(mlx_obj->params->min, mlx_obj->params->max, scale);
 	mlx_obj->params->min = scale_vector(mouse, mlx_obj->params->min, scale);
 	mlx_obj->params->max = scale_vector(mouse, mlx_obj->params->max, scale);
-	printf("final dimmenssions : %f, %f, %f, %f; mouse = %f, %f\n", mlx_obj->params->min.x, mlx_obj->params->min.y, mlx_obj->params->max.x, mlx_obj->params->max.y, mouse.x, mouse.y);
-	printf("new diagonal = %f\n", hypot(mlx_obj->params->max.x - mlx_obj->params->min.x, mlx_obj->params->max.x - mlx_obj->params->min.x));
 	return ;
 }
