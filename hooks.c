@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:10:13 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/04 14:32:38 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/05 19:40:31 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	key_hook(int keycode, t_imx *data)
 		update_range_shift(data, 3);
 	if (keycode == ESC)
 		mlx_destroy_window(data->mlx, data->win);
-	fill_img(data, data->params);
+	update_img(data, data->params);
+	mlx_clear_window(data->mlx, data->win);
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->next_img->img, 0, 0);
 	ft_swap_void((void **)&data->curr_img, (void **)&data->curr_img);
@@ -47,13 +48,15 @@ int	mouse_hook(int mousecode, int x, int y, t_imx *data)
 {
 	t_coor	mouse;
 
-	mlx_mouse_get_pos(data->win, &x, &y);
-	mouse.x = x * (data->params->max.x - data->params->min.x)
-		/ data->params->window_size.x + data->params->min.x;
-	mouse.y = y * (data->params->max.y - data->params->min.y)
-		/ data->params->window_size.y + data->params->min.y;
+	if (mousecode != ZOOM_IN && mousecode != ZOOM_OUT)
+		return (0);
+	y = data->params->window_size.x - y;
+	mouse.x = (double)x;
+	mouse.y = (double)y;
+	mouse = pxl2pt(mouse, data->params);
 	update_range_zoom(data, mousecode, mouse);
-	fill_img(data, data->params);
+	update_img(data, data->params);
+	mlx_clear_window(data->mlx, data->win);
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->next_img->img, 0, 0);
 	ft_swap_void((void **)data->curr_img, (void **)&data->next_img);

@@ -6,17 +6,17 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:56:06 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/04 22:42:53 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/05 18:53:54 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double		map_colors(double color);
-void		fill_img(t_imx *data, t_params *params);
+void		update_img(t_imx *data, t_params *params);
+int			map_colors(double color);
 t_params	*parse_params(char *argv[]);
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_imx		*data;
 
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 	data->next_img = ft_calloc(1, sizeof(t_data));
 	data->next_img->img = mlx_new_image(data->mlx, data->params->window_size.x, data->params->window_size.y);
 	data->win = mlx_new_window(data->mlx, data->params->window_size.x, data->params->window_size.y, "Mandelbrot");
-	fill_img(data, data->params);
+	update_img(data, data->params);
 	mlx_put_image_to_window(data->mlx, data->win, data->next_img->img, 0, 0);
 	set_hooks(data);
 	mlx_loop(data->mlx);
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 	return (0);
 }
 
-void	fill_img(t_imx *data, t_params *params)
+void	update_img(t_imx *data, t_params *params)
 {
 	t_data	*img;
 	t_coor	current;
@@ -48,12 +48,11 @@ void	fill_img(t_imx *data, t_params *params)
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
 	current.x = 0;
-	current.y = 0;
 	while (current.x < params->window_size.x)
 	{
 		current.y = 0;
-		if ((int)current.x % 100 == 0)
-			printf("Computing line %i\n", (int)current.x);
+		//if ((int)current.x % 100 == 0)
+		//	printf("Computing line %i\n", (int)current.x);
 		while (current.y < params->window_size.y)
 		{
 			if (params->ft == MANDELBROT)
@@ -61,6 +60,8 @@ void	fill_img(t_imx *data, t_params *params)
 			else if (params->ft == JULIA)
 				color = julia(pxl2pt(current, params), params->c0,
 					params->nsteps);
+			if ((ft_abs(current.x - 1) < 0.01 && ft_abs(current.y - 1) < 0.01) || (ft_abs(current.x - params->window_size.x / 2) < 0.01 && ft_abs(current.y - params->window_size.y / 2) < 0.01))
+				printf("%f, %f : %f\n", current.x, current.y, color);
 			dst = img->addr + (int)(current.y * img->line_length + current.x * (img->bits_per_pixel / 8));
 			*(unsigned int *)dst = map_colors(color);
 			current.y++;
@@ -70,12 +71,29 @@ void	fill_img(t_imx *data, t_params *params)
 	return ;
 }
 
-double	map_colors(double color)
+int	map_colors(double color)
 {
-	int	r;
-	int	g;
-	int	b;
+	/*
+	color = -4 * pow(color - 0.5, 3) + 0.5;
+	*/
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	unsigned char	a;
+	
 
+	//printf("color = %f\n", color);
+	
+	//color = - 2 * pow(color - 0,5, 2) + 0.5;
+	//color = 0.5 - color;
+	//color = color / pow(color + 1, 10);
+	//color = sin(4 * color - 2) + 0.5;
+	color = 1 - ft_min(ft_max(color, 0), 1);
+	r = (unsigned int)255 * (pow(color, 1000));
+	g = (unsigned int)255 * (pow(color, 1));
+	b = (unsigned int)255 * (pow(color, 0.001));
+	a = 0;//(unsigned int)255 * (color);
+	/*
 	if (color < 0.5)
 	{
 		r = (unsigned char)(255 * (1 - 2 * color));
@@ -87,8 +105,9 @@ double	map_colors(double color)
 		r = 0;
 		g = (unsigned char)(255 * (2 - 2 * color));
 		b = (unsigned char)(255 * (2 * color - 1));
-	}
-	return (16777216 + r * 65536 + g * 256 + b);
+	}*/
+	return (a * pow(255, 3) + r * pow(255, 2) + g * pow(255, 1) + b);
+	//return ((int)((1 - color) * INT_MAX));
 }
 
 

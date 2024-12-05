@@ -105,7 +105,7 @@ unsigned char (*(mipng_defilter[]))(unsigned char *buff, int pos, int a, int b, 
 };
 
 // only work for mlx mac or img 32bpp
-int	mipng_fill_img(void *img, unsigned char *buf, png_info_t *pi)
+int	mipng_update_img(void *img, unsigned char *buf, png_info_t *pi)
 {
   unsigned int	current_filter;
   int	ipos;
@@ -223,7 +223,7 @@ int	mipng_data(void *img, unsigned char *dat, png_info_t *pi)
       //      printf("pb : bpos %d vs expected %d\n", b_pos, img->width*img->height*pi->bpp+img->height);
       return (ERR_DATA_MISMATCH);
     }
-  if ((ret = mipng_fill_img(img, buffer, pi)))
+  if ((ret = mipng_update_img(img, buffer, pi)))
     return (ret);
   return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:42 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/04 22:30:35 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/05 19:35:09 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@
 # define ESC 53
 # define LEFT_CLICK 1
 # define RIGHT_CLICK 2
-# define ZOOM_IN 1//4
-# define ZOOM_OUT 2//5
+# define ZOOM_IN 4
+# define ZOOM_OUT 5
 
 enum e_FRACTYPE {
 	MANDELBROT,
@@ -81,8 +81,8 @@ typedef struct s_imx {
 
 //main.c
 void		img_data_fill(t_data *data, int x, int y, double color);
-double		map_colors(double color);
-void		fill_img(t_imx *data, t_params *params);
+int			map_colors(double color);
+void		update_img(t_imx *data, t_params *params);
 t_params	*parse_params(char *argv[]);
 //fractals.c
 double		madelbrot(t_coor xy, int nsteps);
@@ -94,6 +94,7 @@ int			mouse_hook(int mousecode, int x, int y, t_imx *data);
 //utils.c
 t_coor		scale_vector(t_coor base, t_coor tip, float scale);
 t_coor		pxl2pt(t_coor xy, t_params *params);
+t_coor		pt2pxl(t_coor xy, t_params *params);
 void		update_range_shift(t_imx *data, int dir);
 int			free_all(t_imx *data);
 void		update_range_zoom(t_imx *data, int mousecode, t_coor mouse);
