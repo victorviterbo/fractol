@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:56:06 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/05 18:53:54 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:13:21 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void		update_img(t_imx *data, t_params *params);
 int			map_colors(double color);
 t_params	*parse_params(char *argv[]);
+void		set_pixel(t_coor pxl, t_imx *data, t_params *params);
 
 int	main(int argc, char *argv[])
 {
@@ -41,8 +42,6 @@ void	update_img(t_imx *data, t_params *params)
 {
 	t_data	*img;
 	t_coor	current;
-	char	*dst;
-	double	color;
 
 	img = data->next_img;
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
@@ -51,23 +50,29 @@ void	update_img(t_imx *data, t_params *params)
 	while (current.x < params->window_size.x)
 	{
 		current.y = 0;
-		//if ((int)current.x % 100 == 0)
-		//	printf("Computing line %i\n", (int)current.x);
 		while (current.y < params->window_size.y)
 		{
-			if (params->ft == MANDELBROT)
-				color = madelbrot(pxl2pt(current, params), params->nsteps);
-			else if (params->ft == JULIA)
-				color = julia(pxl2pt(current, params), params->c0,
-					params->nsteps);
-			if ((ft_abs(current.x - 1) < 0.01 && ft_abs(current.y - 1) < 0.01) || (ft_abs(current.x - params->window_size.x / 2) < 0.01 && ft_abs(current.y - params->window_size.y / 2) < 0.01))
-				printf("%f, %f : %f\n", current.x, current.y, color);
-			dst = img->addr + (int)(current.y * img->line_length + current.x * (img->bits_per_pixel / 8));
-			*(unsigned int *)dst = map_colors(color);
+			set_pixel(current, data, params);
 			current.y++;
 		}
 		current.x++;
 	}
+	return ;
+}
+
+void	set_pixel(t_coor pxl, t_imx *data, t_params *params)
+{
+	int		color;
+	char	*dst;
+
+	color = 0;
+	if (params->ft == MANDELBROT)
+		color = madelbrot(pxl2pt(pxl, params), params->nsteps);
+	else if (params->ft == JULIA)
+		color = julia(pxl2pt(pxl, params), params->c0, params->nsteps);
+	dst = data->next_img->addr + (int)(pxl.y * data->next_img->line_length
+			+ pxl.x * (data->next_img->bits_per_pixel / 8));
+	*(unsigned int *)dst = map_colors(color);
 	return ;
 }
 
@@ -88,10 +93,11 @@ int	map_colors(double color)
 	//color = 0.5 - color;
 	//color = color / pow(color + 1, 10);
 	//color = sin(4 * color - 2) + 0.5;
+	printf("Initial color = %.20f\n", color);
 	color = 1 - ft_min(ft_max(color, 0), 1);
-	r = (unsigned int)255 * (pow(color, 1000));
-	g = (unsigned int)255 * (pow(color, 1));
-	b = (unsigned int)255 * (pow(color, 0.001));
+	r = 0;//(unsigned int)255 * (pow(color, 10));
+	g = 0;//(unsigned int)255 * (pow(color, 1));
+	b = (unsigned int)255 * color;
 	a = 0;//(unsigned int)255 * (color);
 	/*
 	if (color < 0.5)
@@ -106,8 +112,8 @@ int	map_colors(double color)
 		g = (unsigned char)(255 * (2 - 2 * color));
 		b = (unsigned char)(255 * (2 * color - 1));
 	}*/
+	printf("Final color = %i\n", b);
 	return (a * pow(255, 3) + r * pow(255, 2) + g * pow(255, 1) + b);
-	//return ((int)((1 - color) * INT_MAX));
 }
 
 

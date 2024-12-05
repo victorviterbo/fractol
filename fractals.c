@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 14:06:40 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/05 11:17:35 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:10:18 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ double	madelbrot(t_coor xy, int nsteps)
 	}
 	if (i == nsteps)
 		return (1.0);
-	i = i + 2 / hypot(r0, i0);
-	return (sqrt(i / nsteps));
+	i = i + hypot(r0, i0) / 2;
+	return (sqrt(i / (double)nsteps));
 }
 
 double	julia(t_coor xy, t_coor c, int nsteps)

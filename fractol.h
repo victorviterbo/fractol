@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:42 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/05 19:35:09 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/05 19:57:18 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ t_coor		pt2pxl(t_coor xy, t_params *params);
 void		update_range_shift(t_imx *data, int dir);
 int			free_all(t_imx *data);
 void		update_range_zoom(t_imx *data, int mousecode, t_coor mouse);
+void		set_pixel(t_coor pxl, t_imx *data, t_params *params);
 
 #endif
