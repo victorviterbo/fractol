@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 21:41:43 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/10 13:35:46 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:47:07 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,9 @@ int	map_colors(double color)
 	unsigned char	a;
 
 	color = 1 - ft_min(ft_max(color, 0), 1);
-	r = 0;//(unsigned char)(255 * 0.01 * color);
+	r = 0;
 	g = (unsigned char)(255 * 0.01 * color);
 	b = (unsigned char)(255 * pow(color, 10));
 	a = 0;
 	return (a * pow(255, 3) + r * pow(255, 2) + g * pow(255, 1) + b);
-	//ret = ft_calloc(1, sizeof(float));
-	//*ret = ((float)color);
-	//return ((INT_MAX - INT_MIN) * color);
 }

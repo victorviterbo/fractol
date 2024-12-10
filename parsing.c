@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:39:09 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/10 13:36:45 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:26:44 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_params	*parse_params(int argc, char *argv[]);
 t_params	*set_params_mandelbrot(t_params *params, int argc, char *argv[]);
 t_params	*set_params_julia(t_params *params, int argc, char *argv[]);
 t_params	*set_params_burning_ship(t_params *params, int argc, char *argv[]);
-void		print_help();
+void		print_help(void);
 
 t_params	*parse_params(int argc, char *argv[])
 {
@@ -29,11 +29,11 @@ t_params	*parse_params(int argc, char *argv[])
 	params->c0.x = -0.432;
 	params->nsteps = 250;
 	params->window_size.x = 600;
-	params->window_size.x = 400;
-	params->min.x = -2;
-	params->min.y = -1;
-	params->max.x = 1;
-	params->max.y = 1;
+	params->window_size.y = 400;
+	params->min.x = -2.0;
+	params->min.y = -1.0;
+	params->max.x = 1.0;
+	params->max.y = 1.0;
 	if (ft_strncmp(argv[1], "MANDELBROT", ft_max(ft_strlen(argv[1]), 11)) == 0)
 		return (set_params_mandelbrot(params, argc, argv));
 	else if (ft_strncmp(argv[1], "JULIA", ft_max(ft_strlen(argv[1]), 6)) == 0)
@@ -50,12 +50,12 @@ t_params	*set_params_mandelbrot(t_params *params, int argc, char *argv[])
 	if (argc == 2)
 		return (params);
 	params->nsteps = ft_atoi(argv[2]);
-	params->window_size.x = ft_atoi(argv[3]);
-	params->window_size.y = ft_atoi(argv[4]);
-	params->min.x = ft_atoi(argv[5]);
-	params->min.y = ft_atoi(argv[6]);
-	params->max.x = ft_atoi(argv[7]);
-	params->max.y = ft_atoi(argv[8]);
+	params->window_size.x = ft_atof(argv[3]);
+	params->window_size.y = ft_atof(argv[4]);
+	params->min.x = ft_atof(argv[5]);
+	params->min.y = ft_atof(argv[6]);
+	params->max.x = ft_atof(argv[7]);
+	params->max.y = ft_atof(argv[8]);
 	return (params);
 }
 
@@ -65,12 +65,12 @@ t_params	*set_params_julia(t_params *params, int argc, char *argv[])
 	if (argc == 2)
 		return (params);
 	params->nsteps = ft_atoi(argv[2]);
-	params->window_size.x = ft_atoi(argv[3]);
-	params->window_size.y = ft_atoi(argv[4]);
-	params->min.x = ft_atoi(argv[5]);
-	params->min.y = ft_atoi(argv[6]);
-	params->max.x = ft_atoi(argv[7]);
-	params->max.y = ft_atoi(argv[8]);
+	params->window_size.x = (double)ft_atof(argv[3]);
+	params->window_size.y = (double)ft_atof(argv[4]);
+	params->min.x = (double)ft_atof(argv[5]);
+	params->min.y = (double)ft_atof(argv[6]);
+	params->max.x = (double)ft_atof(argv[7]);
+	params->max.y = (double)ft_atof(argv[8]);
 	params->c0.x = (double)ft_atof(argv[9]);
 	params->c0.y = (double)ft_atof(argv[10]);
 	return (params);
@@ -83,16 +83,12 @@ t_params	*set_params_burning_ship(t_params *params, int argc, char *argv[])
 	if (argc < 3)
 		return (params);
 	params->nsteps = ft_atoi(argv[2]);
-	ft_printf("params->nsteps = %i\n", params->nsteps);
-	params->window_size.x = ft_atoi(argv[3]);
-	params->window_size.y = ft_atoi(argv[4]);
-	ft_printf("params->nsteps = %f %f\n", params->window_size.x, params->window_size.y);
-	params->min.x = ft_atoi(argv[5]);
-	params->min.y = ft_atoi(argv[6]);
-	ft_printf("params->min = %f %f\n", params->min.x, params->min.y);
-	params->max.x = ft_atoi(argv[7]);
-	params->max.y = ft_atoi(argv[8]);
-	ft_printf("params->max = %f %f\n", params->max.x, params->max.y);
+	params->window_size.x = (double)ft_atof(argv[3]);
+	params->window_size.y = (double)ft_atof(argv[4]);
+	params->min.x = (double)ft_atof(argv[5]);
+	params->min.y = (double)ft_atof(argv[6]);
+	params->max.x = (double)ft_atof(argv[7]);
+	params->max.y = (double)ft_atof(argv[8]);
 	return (params);
 }
 

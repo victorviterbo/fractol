@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:10:13 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/10 13:38:40 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:47:17 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	set_hooks(t_imx *data);
 int		key_hook(int keycode, t_imx *data);
 int		mouse_hook(int mousecode, int x, int y, t_imx *data);
-
 
 void	set_hooks(t_imx *data)
 {
