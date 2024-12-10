@@ -6,36 +6,36 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 14:06:40 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/05 20:10:18 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/06 14:43:46 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double	madelbrot(t_coor xy, int nsteps);
-double	julia(t_coor xy, t_coor c, int nsteps);
+double	madelbrot(t_coor c0, int nsteps);
+double	julia(t_coor xy, t_coor c0, int nsteps);
+double	burning_ship(t_coor xy, int nsteps);
 
-double	madelbrot(t_coor xy, int nsteps)
+double	madelbrot(t_coor c0, int nsteps)
 {
 	double	i;
-	double	r0;
-	double	i0;
+	t_coor	xy;
 	double	r_temp;
 
 	i = 0;
-	r0 = 0;
-	i0 = 0;
-	while (i < nsteps && hypot(r0, i0) <= 2)
+	xy.x = 0;
+	xy.y = 0;
+	while (i < nsteps && pow(xy.x, 2) + pow(xy.y, 2) <= 4)
 	{
-		r_temp = r0 * r0 - i0 * i0 + xy.x;
-		i0 = 2 * r0 * i0 + xy.y;
-		r0 = r_temp;
+		r_temp = xy.x * xy.x - xy.y * xy.y + c0.x;
+		xy.y = 2 * xy.x * xy.y + c0.y;
+		xy.x = r_temp;
 		i++;
 	}
 	if (i == nsteps)
 		return (1.0);
-	i = i + hypot(r0, i0) / 2;
-	return (sqrt(i / (double)nsteps));
+	i = i + 4 / (pow(xy.x, 2) + pow(xy.y, 2));
+	return (i / (double)nsteps);
 }
 
 double	julia(t_coor xy, t_coor c, int nsteps)
@@ -44,7 +44,7 @@ double	julia(t_coor xy, t_coor c, int nsteps)
 	double	r_temp;
 
 	i = 0;
-	while (i < nsteps && xy.x * xy.x + xy.y * xy.y < 4)
+	while (i < nsteps && pow(xy.x, 2) + pow(xy.y, 2) < 4)
 	{
 		r_temp = xy.x * xy.x - xy.y * xy.y + c.x;
 		xy.y = 2 * xy.x * xy.y + c.y;
@@ -52,6 +52,29 @@ double	julia(t_coor xy, t_coor c, int nsteps)
 		i++;
 	}
 	if (i == nsteps)
-		return (1);
+		return (1.0);
+	i = i + 4 / (pow(xy.x, 2) + pow(xy.y, 2));
+	return (i / (double)nsteps);
+}
+
+double	burning_ship(t_coor xy, int nsteps)
+{
+	double	i;
+	t_coor	xy0;
+	double	r_temp;
+
+	i = 0;
+	xy0.x = xy.x;
+	xy0.y = xy.y;
+	while (i < nsteps && pow(xy.x, 2) + pow(xy.y, 2) < 4)
+	{
+		r_temp = xy.x * xy.x - xy.y * xy.y + xy0.x;
+		xy.y = ft_abs(2 * xy.x * xy.y) + xy0.y;
+		xy.x = r_temp;
+		i++;
+	}
+	if (i == nsteps)
+		return (1.0);
+	i = i + 4 / (pow(xy.x, 2) + pow(xy.y, 2));
 	return (i / (double)nsteps);
 }

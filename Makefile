@@ -6,13 +6,13 @@
 #    By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/01 12:45:22 by vviterbo          #+#    #+#              #
-#    Updated: 2024/12/03 14:16:05 by vviterbo         ###   ########.fr        #
+#    Updated: 2024/12/10 12:45:31 by vviterbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
-SRCS = main.c fractals.c hooks.c utils.c
+SRCS = main.c fractals.c hooks.c parsing.c utils.c utils_img.c
 
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 
@@ -31,7 +31,7 @@ fclean : clean
 re : fclean all
 
 $(NAME):
-	@$(MAKE) -C libft/ xtra
+	@$(MAKE) -C libft/ all
 	@$(MAKE) -C minilibx/ all
 	@$(CC) $(CFLAGS) $(SRCS) -o $(NAME) -lm -Lminilibx/ -lmlx -L libft/ -lft
 
