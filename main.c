@@ -48,7 +48,7 @@ void	update_img(t_imx *data, t_params *params)
 
 	img_idx = data->img_index;
 	ft_printf("Loading image... ");
-	img = data->next_img;
+	img = data->curr_img;
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
 	current.x = 0;

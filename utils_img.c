@@ -68,8 +68,8 @@ void	set_pixel(t_coor pxl, t_imx *data, t_params *params)
 		color = julia(pxl2pt(pxl, params), params->c0, params->nsteps);
 	else if (params->ft == BURNING_SHIP)
 		color = burning_ship(pxl2pt(pxl, params), params->nsteps);
-	dst = data->next_img->addr + (int)(pxl.y * data->next_img->line_length
-			+ pxl.x * (data->next_img->bits_per_pixel / 8));
+	dst = data->curr_img->addr + (int)(pxl.y * data->curr_img->line_length
+			+ pxl.x * (data->curr_img->bits_per_pixel / 8));
 	*(unsigned int *)dst = map_colors(color);
 	return ;
 }

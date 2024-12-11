@@ -42,8 +42,9 @@ int	key_hook(int keycode, t_imx *data)
 	ft_printf("new img_index = %i\n", data->img_index);
 	update_img(data, data->params);
 	mlx_put_image_to_window(data->mlx, data->win,
-		data->next_img->img, 0, 0);
-	ft_swap_void((void **)&data->curr_img, (void **)&data->curr_img);
+		data->curr_img->img, 0, 0);
+	ft_printf("IMAGE PUT\n");
+	//ft_swap_void((void **)&data->curr_img, (void **)&data->next_img);
 	return (0);
 }
 
@@ -59,10 +60,12 @@ int	mouse_hook(int mousecode, int x, int y, t_imx *data)
 	mouse.x = (double)x;
 	mouse.y = (double)y;
 	mouse = pxl2pt(mouse, data->params);
+	mlx_clear_window(data->mlx, data->win);
 	update_range_zoom(data, mousecode, mouse);
 	update_img(data, data->params);
 	mlx_put_image_to_window(data->mlx, data->win,
-		data->next_img->img, 0, 0);
-	ft_swap_void((void **)data->curr_img, (void **)&data->next_img);
+		data->curr_img->img, 0, 0);
+	ft_printf("IMAGE PUT\n");
+	//ft_swap_void((void **)&data->curr_img, (void **)&data->next_img);
 	return (0);
 }

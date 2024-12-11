@@ -24,7 +24,7 @@ t_params	*parse_params(int argc, char *argv[])
 
 	params = ft_calloc(1, sizeof(t_params));
 	params->c0 = ft_initvec(-0.4, 0.6, 0);
-	params->nsteps = 2500;
+	params->nsteps = 250;
 	params->window_size = ft_initvec(600, 400, 0);
 	params->min = ft_initvec(-2.0, -1, 0);
 	params->max = ft_initvec(1.0, 1, 0);

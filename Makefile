@@ -22,8 +22,6 @@ CC = cc
 
 OS := $(shell uname)
 
-INCLUDE = 
-
 ifeq ($(OS), Darwin)
 	MLX_PATH = minilibx_opengl/
 	INCLUDE = -lm -L $(MLX_PATH) -lmlx -L libft/ -lft -framework OpenGL -framework AppKit
