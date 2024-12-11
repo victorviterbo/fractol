@@ -20,14 +20,17 @@
 # define ARROW_SCALE 0.1
 # define ZOOM_SCALE 0.8
 
+# define MACOS 0
+# define LINUX 1
+
 # ifdef __linux__
-#  define LEFT_ARROW 123
-#  define RIGHT_ARROW 124
-#  define UP_ARROW 126
-#  define DOWN_ARROW 125
-#  define ESC 53
+#  define LEFT_ARROW 65363
+#  define RIGHT_ARROW 65361
+#  define UP_ARROW 65362
+#  define DOWN_ARROW 65364
+#  define ESC 65307
 #  define LEFT_CLICK 1
-#  define RIGHT_CLICK 2
+#  define RIGHT_CLICK 3
 #  define ZOOM_IN 4
 #  define ZOOM_OUT 5
 # elif defined __APPLE__
@@ -72,6 +75,7 @@ typedef struct s_imx {
 	t_params	*params;
 	t_data		*curr_img;
 	t_data		*next_img;
+	int			img_index;
 }	t_imx;
 
 //main.c

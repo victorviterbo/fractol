@@ -16,31 +16,42 @@ SRCS = main.c fractals.c hooks.c parsing.c utils.c utils_img.c
 
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 
-CFLAGS = -Wall -Wextra -Werror -framework OpenGL -framework AppKit -framework CoreFoundation
+CFLAGS = -Wall -Wextra -Werror
 
 CC = cc
+
+OS := $(shell uname)
+
+INCLUDE = 
+
+ifeq ($(OS), Darwin)
+	MLX_PATH = minilibx_opengl/
+	INCLUDE = -lm -L $(MLX_PATH) -lmlx -L libft/ -lft -framework OpenGL -framework AppKit
+else ifeq ($(OS), Linux)
+	MLX_PATH = minilibx-linux/
+	INCLUDE = -lm -L $(MLX_PATH) -lmlx -L libft/ -lft -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz 
+endif
 
 all: $(NAME)
 
 clean :
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
 
 fclean : clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re : fclean all
 
 clean_libs : 
-	$(MAKE) -C libft/ fclean
-	$(MAKE) -C minilibx_opengl/ clean
+	@$(MAKE) -C libft/ fclean
+	@$(MAKE) -C $(MLX_PATH) clean
 
 relibs : clean_libs re
 
 $(NAME):
-	$(MAKE) -C libft/ all
-	$(MAKE) -C minilibx_opengl/ all
-	$(CC) $(CFLAGS) $(SRCS) -o $(NAME) -lm -L minilibx_opengl/ -lmlx -L libft/ -lft 
+	@$(MAKE) -C libft/ all
+	@$(MAKE) -C $(MLX_PATH) all
+	@$(CC) $(CFLAGS) $(SRCS) $(INCLUDE) -o $(NAME)
 
 .PHONY: all clean fclean re bonus
 
-#-Wl,-rpath,$(ORIGIN)/minilibx_opengl/

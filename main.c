@@ -31,6 +31,7 @@ int	main(int argc, char *argv[])
 			data->params->window_size.y);
 	data->win = mlx_new_window(data->mlx, data->params->window_size.x,
 			data->params->window_size.y, argv[1]);
+	data->img_index = 0;
 	update_img(data, data->params);
 	mlx_put_image_to_window(data->mlx, data->win, data->next_img->img, 0, 0);
 	set_hooks(data);
@@ -43,7 +44,9 @@ void	update_img(t_imx *data, t_params *params)
 {
 	t_data	*img;
 	t_coor	current;
+	int		img_idx;
 
+	img_idx = data->img_index;
 	ft_printf("Loading image... ");
 	img = data->next_img;
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
@@ -51,6 +54,12 @@ void	update_img(t_imx *data, t_params *params)
 	current.x = 0;
 	while (current.x < params->window_size.x)
 	{
+		//ft_printf("img index local %i vs general %i", img_idx, data->img_index);
+		if (img_idx != data->img_index)
+		{
+			ft_printf("Aborting !\n");
+			return ;
+		}
 		current.y = 0;
 		while (current.y < params->window_size.y)
 		{

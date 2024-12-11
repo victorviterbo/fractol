@@ -23,15 +23,11 @@ t_params	*parse_params(int argc, char *argv[])
 	t_params	*params;
 
 	params = ft_calloc(1, sizeof(t_params));
-	params->c0.x = 0.6;
-	params->c0.x = 0.4;
-	params->nsteps = 250;
-	params->window_size.x = 600;
-	params->window_size.y = 400;
-	params->min.x = -2.0;
-	params->min.y = -1.0;
-	params->max.x = 1.0;
-	params->max.y = 1.0;
+	params->c0 = ft_initvec(-0.4, 0.6, 0);
+	params->nsteps = 2500;
+	params->window_size = ft_initvec(600, 400, 0);
+	params->min = ft_initvec(-2.0, -1, 0);
+	params->max = ft_initvec(1.0, 1, 0);
 	if (ft_strncmp(ft_str_upper(argv[1]), "MANDELBROT",
 			ft_max(ft_strlen(argv[1]), 11)) == 0)
 		return (set_params_mandelbrot(params, argc, argv));
@@ -41,13 +37,17 @@ t_params	*parse_params(int argc, char *argv[])
 	else if (ft_strncmp(ft_str_upper(argv[1]), "BURNING_SHIP",
 			ft_max(ft_strlen(argv[1]), 13)) == 0)
 		return (set_params_burning_ship(params, argc, argv));
-	exit(1);
+	print_help_exit();
+	return (params);
 }
 
 t_params	*set_params_mandelbrot(t_params *params, int argc, char *argv[])
 {
-	if (argc != 9)
+	if (argc != 2 && argc != 9)
+	{
+		ft_printf("Incorect number of arguments (%i != 9), exiting...\n", argc);
 		print_help_exit();
+	}
 	params->ft = MANDELBROT;
 	if (argc == 2)
 		return (params);
@@ -64,8 +64,11 @@ t_params	*set_params_mandelbrot(t_params *params, int argc, char *argv[])
 
 t_params	*set_params_julia(t_params *params, int argc, char *argv[])
 {
-	if (argc != 11)
+	if (argc != 2 && argc != 11)
+	{
+		ft_printf("Incorect number of arguments (%i != 11), exiting...\n", argc);
 		print_help_exit();
+	}
 	params->ft = JULIA;
 	if (argc == 2)
 		return (params);
@@ -83,11 +86,13 @@ t_params	*set_params_julia(t_params *params, int argc, char *argv[])
 
 t_params	*set_params_burning_ship(t_params *params, int argc, char *argv[])
 {
-	if (argc != 9)
+	if (argc != 2 && argc != 9)
+	{
+		ft_printf("Incorect number of arguments (%i != 9), exiting...\n", argc);
 		print_help_exit();
+	}
 	params->ft = BURNING_SHIP;
-	ft_printf("params->ft = %i\n", params->ft);
-	if (argc < 3)
+	if (argc == 2)
 		return (params);
 	params->nsteps = ft_atoi(argv[2]);
 	params->window_size = ft_initvec((double)ft_atof(argv[3]),

@@ -38,6 +38,8 @@ int	key_hook(int keycode, t_imx *data)
 		mlx_destroy_window(data->mlx, data->win);
 	else
 		return (0);
+	data->img_index++;
+	ft_printf("new img_index = %i\n", data->img_index);
 	update_img(data, data->params);
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->next_img->img, 0, 0);
@@ -49,8 +51,11 @@ int	mouse_hook(int mousecode, int x, int y, t_imx *data)
 {
 	t_coor	mouse;
 
+	ft_printf("mousecode = %i\n", mousecode);
 	if (mousecode != ZOOM_IN && mousecode != ZOOM_OUT)
 		return (0);
+	data->img_index++;
+	ft_printf("new img_index = %i\n", data->img_index);
 	mouse.x = (double)x;
 	mouse.y = (double)y;
 	mouse = pxl2pt(mouse, data->params);
