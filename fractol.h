@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:42 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/10 14:46:48 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:42:41 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ void		set_pixel(t_coor pxl, t_imx *data, t_params *params);
 t_coor		scale_vector(t_coor base, t_coor tip, float scale);
 t_coor		pxl2pt(t_coor xy, t_params *params);
 t_coor		pt2pxl(t_coor xy, t_params *params);
+char		*ft_str_upper(char *str);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:56:06 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/10 14:47:33 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:08:43 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void		update_img(t_imx *data, t_params *params);
+void	update_img(t_imx *data, t_params *params);
 
 int	main(int argc, char *argv[])
 {

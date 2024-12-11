@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:10:02 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/06 13:39:22 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/11 09:46:34 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_coor		scale_vector(t_coor base, t_coor tip, float scale);
 t_coor		pxl2pt(t_coor xy, t_params *params);
 t_coor		pt2pxl(t_coor xy, t_params *params);
+char		*ft_str_upper(char *str);
 
 t_coor	scale_vector(t_coor base, t_coor tip, float scale)
 {
@@ -45,4 +46,17 @@ t_coor	pt2pxl(t_coor xy, t_params *params)
 	xy.y = xy.y * (double)params->window_size.y
 		/ (params->max.y - params->min.y);
 	return (xy);
+}
+
+char	*ft_str_upper(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (*(str + i))
+	{
+		*(str + i) = ft_toupper(*(str + i));
+		i++;
+	}
+	return (str);
 }
