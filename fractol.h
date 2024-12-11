@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:42 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/10 15:42:41 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/11 11:53:51 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,33 @@
 # define FRACTOL_H
 
 # include <math.h>
-# include "minilibx/mlx.h"
+# include "minilibx_opengl/mlx.h"
 # include "libft/libft.h"
 
 # define ARROW_SCALE 0.1
 # define ZOOM_SCALE 0.8
 
-# define LEFT_ARROW 123
-# define RIGHT_ARROW 124
-# define UP_ARROW 126
-# define DOWN_ARROW 125
-# define ESC 53
-# define LEFT_CLICK 1
-# define RIGHT_CLICK 2
-# define ZOOM_IN 1//4
-# define ZOOM_OUT 2//5
+# ifdef __linux__
+#  define LEFT_ARROW 123
+#  define RIGHT_ARROW 124
+#  define UP_ARROW 126
+#  define DOWN_ARROW 125
+#  define ESC 53
+#  define LEFT_CLICK 1
+#  define RIGHT_CLICK 2
+#  define ZOOM_IN 4
+#  define ZOOM_OUT 5
+# elif defined __APPLE__
+#  define LEFT_ARROW 123
+#  define RIGHT_ARROW 124
+#  define UP_ARROW 126
+#  define DOWN_ARROW 125
+#  define ESC 53
+#  define LEFT_CLICK 1
+#  define RIGHT_CLICK 2
+#  define ZOOM_IN 4
+#  define ZOOM_OUT 5
+# endif
 
 enum e_FRACTYPE {
 	MANDELBROT,
@@ -84,7 +96,7 @@ int			free_all(t_imx *data);
 void		update_range_shift(t_imx *data, int dir);
 void		update_range_zoom(t_imx *data, int mousecode, t_coor mouse);
 void		set_pixel(t_coor pxl, t_imx *data, t_params *params);
-//utils_vec.c
+//utils.c
 t_coor		scale_vector(t_coor base, t_coor tip, float scale);
 t_coor		pxl2pt(t_coor xy, t_params *params);
 t_coor		pt2pxl(t_coor xy, t_params *params);
