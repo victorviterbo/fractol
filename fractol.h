@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:42 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/11 11:53:51 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:52:37 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 #  define RIGHT_CLICK 2
 #  define ZOOM_IN 4
 #  define ZOOM_OUT 5
+
 # endif
 
 enum e_FRACTYPE {
@@ -74,13 +75,10 @@ typedef struct s_imx {
 }	t_imx;
 
 //main.c
-void		img_data_fill(t_data *data, int x, int y, double color);
-int			map_colors(double color);
 void		update_img(t_imx *data, t_params *params);
-t_params	*parse_params(int argc, char *argv[]);
 //fractals.c
-double		madelbrot(t_coor xy, int nsteps);
-double		julia(t_coor xy, t_coor c, int nsteps);
+double		madelbrot(t_coor c0, int nsteps);
+double		julia(t_coor xy, t_coor c0, int nsteps);
 double		burning_ship(t_coor xy, int nsteps);
 //hooks.c
 void		set_hooks(t_imx *data);
@@ -90,16 +88,19 @@ int			mouse_hook(int mousecode, int x, int y, t_imx *data);
 t_params	*parse_params(int argc, char *argv[]);
 t_params	*set_params_mandelbrot(t_params *params, int argc, char *argv[]);
 t_params	*set_params_julia(t_params *params, int argc, char *argv[]);
-t_params	*set_params_burning(t_params *params, int argc, char *argv[]);
+t_params	*set_params_burning_ship(t_params *params, int argc, char *argv[]);
+void		print_help_exit(void);
 //utils_img.c
 int			free_all(t_imx *data);
 void		update_range_shift(t_imx *data, int dir);
 void		update_range_zoom(t_imx *data, int mousecode, t_coor mouse);
 void		set_pixel(t_coor pxl, t_imx *data, t_params *params);
+int			map_colors(double color);
 //utils.c
 t_coor		scale_vector(t_coor base, t_coor tip, float scale);
 t_coor		pxl2pt(t_coor xy, t_params *params);
 t_coor		pt2pxl(t_coor xy, t_params *params);
 char		*ft_str_upper(char *str);
+int			free_all(t_imx *data);
 
 #endif

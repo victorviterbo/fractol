@@ -6,7 +6,7 @@
 #    By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/01 12:45:22 by vviterbo          #+#    #+#              #
-#    Updated: 2024/12/11 11:47:04 by vviterbo         ###   ########.fr        #
+#    Updated: 2024/12/11 15:09:19 by vviterbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,20 +18,23 @@ OBJS = $(patsubst %.c, %.o, $(SRCS))
 
 CFLAGS = -Wall -Wextra -Werror -framework OpenGL -framework AppKit -framework CoreFoundation
 
-CC = gcc
+CC = cc
 
 all: $(NAME)
 
 clean :
-	$(MAKE) -C libft/ clean
-	$(MAKE) -C minilibx_opengl/ clean
 	rm -f $(OBJS)
 
 fclean : clean
-	$(MAKE) -C libft/ fclean
 	rm -f $(NAME)
 
 re : fclean all
+
+clean_libs : 
+	$(MAKE) -C libft/ fclean
+	$(MAKE) -C minilibx_opengl/ clean
+
+relibs : clean_libs re
 
 $(NAME):
 	$(MAKE) -C libft/ all

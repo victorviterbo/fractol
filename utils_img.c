@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 21:41:43 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/10 14:47:07 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:56:40 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,6 @@ void	update_range_shift(t_imx *data, int dir);
 void	update_range_zoom(t_imx *data, int mousecode, t_coor mouse);
 void	set_pixel(t_coor pxl, t_imx *data, t_params *params);
 int		map_colors(double color);
-
-int	free_all(t_imx *data)
-{
-	mlx_destroy_image(data->mlx, data->curr_img->img);
-	mlx_destroy_image(data->mlx, data->next_img->img);
-	free(data->curr_img);
-	free(data->next_img);
-	free(data->params);
-	exit(0);
-}
 
 void	update_range_zoom(t_imx *data, int mousecode, t_coor mouse)
 {
@@ -92,9 +82,9 @@ int	map_colors(double color)
 	unsigned char	a;
 
 	color = 1 - ft_min(ft_max(color, 0), 1);
-	r = 0;
-	g = (unsigned char)(255 * 0.01 * color);
-	b = (unsigned char)(255 * pow(color, 10));
+	r = (unsigned char)(255 * color);
+	g = (unsigned char)(255 * pow(color, 0.01));
+	b = (unsigned char)(255 * pow(color, 100));
 	a = 0;
 	return (a * pow(255, 3) + r * pow(255, 2) + g * pow(255, 1) + b);
 }

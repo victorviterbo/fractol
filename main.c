@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:56:06 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/10 15:08:43 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:48:57 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	main(int argc, char *argv[])
 {
 	t_imx		*data;
 
+	if (argc < 2)
+		print_help_exit();
 	data = ft_calloc(1, sizeof(t_imx));
 	data->mlx = mlx_init();
 	data->params = parse_params(argc, argv);
@@ -33,7 +35,7 @@ int	main(int argc, char *argv[])
 	mlx_put_image_to_window(data->mlx, data->win, data->next_img->img, 0, 0);
 	set_hooks(data);
 	mlx_loop(data->mlx);
-	free(data);
+	free_all(data);
 	return (0);
 }
 

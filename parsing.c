@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:39:09 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/10 15:50:34 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/11 15:01:44 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,15 @@ t_params	*parse_params(int argc, char *argv[]);
 t_params	*set_params_mandelbrot(t_params *params, int argc, char *argv[]);
 t_params	*set_params_julia(t_params *params, int argc, char *argv[]);
 t_params	*set_params_burning_ship(t_params *params, int argc, char *argv[]);
-void		print_help(void);
+void		print_help_exit(void);
 
 t_params	*parse_params(int argc, char *argv[])
 {
 	t_params	*params;
 
-	if (argc < 2)
-		print_help();
 	params = ft_calloc(1, sizeof(t_params));
-	params->c0.x = -0.656;
-	params->c0.x = -0.432;
+	params->c0.x = 0.6;
+	params->c0.x = 0.4;
 	params->nsteps = 250;
 	params->window_size.x = 600;
 	params->window_size.y = 400;
@@ -34,11 +32,11 @@ t_params	*parse_params(int argc, char *argv[])
 	params->min.y = -1.0;
 	params->max.x = 1.0;
 	params->max.y = 1.0;
-	//if (argc > 1)
-	//	argv[1] = ft_str_upper(argv[1]);
-	if (ft_strncmp(ft_str_upper(argv[1]), "MANDELBROT", ft_max(ft_strlen(argv[1]), 11)) == 0)
+	if (ft_strncmp(ft_str_upper(argv[1]), "MANDELBROT",
+			ft_max(ft_strlen(argv[1]), 11)) == 0)
 		return (set_params_mandelbrot(params, argc, argv));
-	else if (ft_strncmp(ft_str_upper(argv[1]), "JULIA", ft_max(ft_strlen(argv[1]), 6)) == 0)
+	else if (ft_strncmp(ft_str_upper(argv[1]), "JULIA",
+			ft_max(ft_strlen(argv[1]), 6)) == 0)
 		return (set_params_julia(params, argc, argv));
 	else if (ft_strncmp(ft_str_upper(argv[1]), "BURNING_SHIP",
 			ft_max(ft_strlen(argv[1]), 13)) == 0)
@@ -48,6 +46,8 @@ t_params	*parse_params(int argc, char *argv[])
 
 t_params	*set_params_mandelbrot(t_params *params, int argc, char *argv[])
 {
+	if (argc != 9)
+		print_help_exit();
 	params->ft = MANDELBROT;
 	if (argc == 2)
 		return (params);
@@ -64,6 +64,8 @@ t_params	*set_params_mandelbrot(t_params *params, int argc, char *argv[])
 
 t_params	*set_params_julia(t_params *params, int argc, char *argv[])
 {
+	if (argc != 11)
+		print_help_exit();
 	params->ft = JULIA;
 	if (argc == 2)
 		return (params);
@@ -81,6 +83,8 @@ t_params	*set_params_julia(t_params *params, int argc, char *argv[])
 
 t_params	*set_params_burning_ship(t_params *params, int argc, char *argv[])
 {
+	if (argc != 9)
+		print_help_exit();
 	params->ft = BURNING_SHIP;
 	ft_printf("params->ft = %i\n", params->ft);
 	if (argc < 3)
@@ -95,14 +99,16 @@ t_params	*set_params_burning_ship(t_params *params, int argc, char *argv[])
 	return (params);
 }
 
-void	print_help(void)
+void	print_help_exit(void)
 {
 	ft_printf("Please provide input:\n");
 	ft_printf("./fractol FT [nsteps winx winy re_min im_min ");
 	ft_printf("re_max im_max [re_c0 im_c0]]\n");
 	ft_printf("Where\n");
 	ft_printf("- FT is the fractal to display (available MANDELBROT, ");
-	ft_printf("JULIA, BURNING_SHIP)\n");
+	ft_printf("JULIA, BURNING_SHIP), parameter is not case-sensitive\n");
+	ft_printf("- nsteps is the number of iterations\n");
+	ft_printf(" to be performed per pixel");
 	ft_printf("- winx, winy : horizontal and vertical size");
 	ft_printf(" of window (respectively, in pixels)\n");
 	ft_printf("- re_min, im_min : real and imaginary part ");

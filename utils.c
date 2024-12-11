@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:10:02 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/11 09:46:34 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:42:23 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_coor		scale_vector(t_coor base, t_coor tip, float scale);
 t_coor		pxl2pt(t_coor xy, t_params *params);
 t_coor		pt2pxl(t_coor xy, t_params *params);
 char		*ft_str_upper(char *str);
+int			free_all(t_imx *data);
 
 t_coor	scale_vector(t_coor base, t_coor tip, float scale)
 {
@@ -59,4 +60,14 @@ char	*ft_str_upper(char *str)
 		i++;
 	}
 	return (str);
+}
+
+int	free_all(t_imx *data)
+{
+	mlx_destroy_image(data->mlx, data->curr_img->img);
+	mlx_destroy_image(data->mlx, data->next_img->img);
+	free(data->curr_img);
+	free(data->next_img);
+	free(data->params);
+	exit(0);
 }
