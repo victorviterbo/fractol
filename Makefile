@@ -6,13 +6,13 @@
 #    By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/01 12:45:22 by vviterbo          #+#    #+#              #
-#    Updated: 2024/12/11 15:09:19 by vviterbo         ###   ########.fr        #
+#    Updated: 2024/12/12 11:17:24 by vviterbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
-SRCS = main.c fractals.c hooks.c parsing.c utils.c utils_img.c
+SRCS = main.c fractals.c hooks.c parsing.c utils.c utils_img.c arg_check.c
 
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 
@@ -33,23 +33,23 @@ endif
 all: $(NAME)
 
 clean :
-	@rm -f $(OBJS)
+	rm -f $(OBJS)
 
 fclean : clean
-	@rm -f $(NAME)
+	rm -f $(NAME)
 
 re : fclean all
 
 clean_libs : 
-	@$(MAKE) -C libft/ fclean
-	@$(MAKE) -C $(MLX_PATH) clean
+	$(MAKE) -C libft/ fclean
+	$(MAKE) -C $(MLX_PATH) clean
 
 relibs : clean_libs re
 
 $(NAME):
-	@$(MAKE) -C libft/ all
-	@$(MAKE) -C $(MLX_PATH) all
-	@$(CC) $(CFLAGS) $(SRCS) $(INCLUDE) -o $(NAME)
+	$(MAKE) -C libft/ all
+	$(MAKE) -C $(MLX_PATH) all
+	$(CC) $(CFLAGS) $(SRCS) $(INCLUDE) -o $(NAME)
 
 .PHONY: all clean fclean re bonus
 

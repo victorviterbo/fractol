@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:56:06 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/11 18:51:35 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:42:29 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int	main(int argc, char *argv[])
 {
 	t_imx		*data;
 
-	if (argc < 2)
-		print_help_exit();
+	arg_check(argc, argv);
 	data = ft_calloc(1, sizeof(t_imx));
 	data->mlx = mlx_init();
 	data->params = parse_params(argc, argv);
@@ -54,12 +53,6 @@ void	update_img(t_imx *data, t_params *params)
 	current.x = 0;
 	while (current.x < params->window_size.x)
 	{
-		//ft_printf("img index local %i vs general %i", img_idx, data->img_index);
-		if (img_idx != data->img_index)
-		{
-			ft_printf("Aborting !\n");
-			return ;
-		}
 		current.y = 0;
 		while (current.y < params->window_size.y)
 		{

@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:10:13 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/11 15:11:19 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/11 19:32:46 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	set_hooks(t_imx *data)
 
 int	key_hook(int keycode, t_imx *data)
 {
-	ft_printf("keycode = %i\n", keycode);
 	if (keycode == LEFT_ARROW)
 		update_range_shift(data, 0);
 	else if (keycode == RIGHT_ARROW)
@@ -38,13 +37,9 @@ int	key_hook(int keycode, t_imx *data)
 		mlx_destroy_window(data->mlx, data->win);
 	else
 		return (0);
-	data->img_index++;
-	ft_printf("new img_index = %i\n", data->img_index);
 	update_img(data, data->params);
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->curr_img->img, 0, 0);
-	ft_printf("IMAGE PUT\n");
-	//ft_swap_void((void **)&data->curr_img, (void **)&data->next_img);
 	return (0);
 }
 
@@ -52,11 +47,8 @@ int	mouse_hook(int mousecode, int x, int y, t_imx *data)
 {
 	t_coor	mouse;
 
-	ft_printf("mousecode = %i\n", mousecode);
 	if (mousecode != ZOOM_IN && mousecode != ZOOM_OUT)
 		return (0);
-	data->img_index++;
-	ft_printf("new img_index = %i\n", data->img_index);
 	mouse.x = (double)x;
 	mouse.y = (double)y;
 	mouse = pxl2pt(mouse, data->params);
@@ -65,7 +57,5 @@ int	mouse_hook(int mousecode, int x, int y, t_imx *data)
 	update_img(data, data->params);
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->curr_img->img, 0, 0);
-	ft_printf("IMAGE PUT\n");
-	//ft_swap_void((void **)&data->curr_img, (void **)&data->next_img);
 	return (0);
 }

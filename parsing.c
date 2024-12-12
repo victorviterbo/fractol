@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:39:09 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/11 15:01:44 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:44:40 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ t_params	*set_params_mandelbrot(t_params *params, int argc, char *argv[])
 	params->ft = MANDELBROT;
 	if (argc == 2)
 		return (params);
-	params->nsteps = ft_atoi(argv[2]);
 	params->nsteps = ft_atoi(argv[2]);
 	params->window_size = ft_initvec((double)ft_atof(argv[3]),
 			(double)ft_atof(argv[4]), 0);
@@ -106,7 +105,7 @@ t_params	*set_params_burning_ship(t_params *params, int argc, char *argv[])
 
 void	print_help_exit(void)
 {
-	ft_printf("Please provide input:\n");
+	ft_printf("Please provide correct input:\n");
 	ft_printf("./fractol FT [nsteps winx winy re_min im_min ");
 	ft_printf("re_max im_max [re_c0 im_c0]]\n");
 	ft_printf("Where\n");
@@ -123,5 +122,6 @@ void	print_help_exit(void)
 	ft_printf("- c0x, c0y : ");
 	ft_printf("With Julia fractal only, the real and imaginary part ");
 	ft_printf("of the starting point\n");
+	ft_printf("Defaults are [100 600 400 -2.0 -1.0 1 1 [-0.4, 0.6]]\n");
 	exit(0);
 }
