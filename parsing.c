@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:39:09 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/12 11:44:40 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:52:38 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@ t_params	*parse_params(int argc, char *argv[])
 
 	params = ft_calloc(1, sizeof(t_params));
 	params->c0 = ft_initvec(-0.4, 0.6, 0);
-	params->nsteps = 250;
+	params->nsteps = 50;
 	params->window_size = ft_initvec(600, 400, 0);
 	params->min = ft_initvec(-2.0, -1, 0);
 	params->max = ft_initvec(1.0, 1, 0);
 	if (ft_strncmp(ft_str_upper(argv[1]), "MANDELBROT",
-			ft_max(ft_strlen(argv[1]), 11)) == 0)
+			ft_strlen(argv[1])) == 0)
 		return (set_params_mandelbrot(params, argc, argv));
 	else if (ft_strncmp(ft_str_upper(argv[1]), "JULIA",
-			ft_max(ft_strlen(argv[1]), 6)) == 0)
+			ft_strlen(argv[1])) == 0)
 		return (set_params_julia(params, argc, argv));
 	else if (ft_strncmp(ft_str_upper(argv[1]), "BURNING_SHIP",
-			ft_max(ft_strlen(argv[1]), 13)) == 0)
+			ft_strlen(argv[1])) == 0)
 		return (set_params_burning_ship(params, argc, argv));
 	print_help_exit();
 	return (params);
@@ -45,7 +45,7 @@ t_params	*set_params_mandelbrot(t_params *params, int argc, char *argv[])
 {
 	if (argc != 2 && argc != 9)
 	{
-		ft_printf("Incorect number of arguments (%i != 9), exiting...\n", argc);
+		ft_printf("\nIncorect number of arguments (%i != 9), exiting\n\n", argc);
 		print_help_exit();
 	}
 	params->ft = MANDELBROT;
@@ -65,7 +65,7 @@ t_params	*set_params_julia(t_params *params, int argc, char *argv[])
 {
 	if (argc != 2 && argc != 11)
 	{
-		ft_printf("Incorect number of arguments (%i != 11), exiting...\n", argc);
+		ft_printf("\nIncorect number of arguments (%i != 11), exiting\n\n", argc);
 		print_help_exit();
 	}
 	params->ft = JULIA;
@@ -87,7 +87,7 @@ t_params	*set_params_burning_ship(t_params *params, int argc, char *argv[])
 {
 	if (argc != 2 && argc != 9)
 	{
-		ft_printf("Incorect number of arguments (%i != 9), exiting...\n", argc);
+		ft_printf("\nIncorect number of arguments (%i != 9), exiting\n\n", argc);
 		print_help_exit();
 	}
 	params->ft = BURNING_SHIP;

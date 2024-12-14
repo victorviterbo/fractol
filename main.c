@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:56:06 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/12 11:42:29 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:47:25 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,8 @@ int	main(int argc, char *argv[])
 	data->curr_img = ft_calloc(1, sizeof(t_data));
 	data->curr_img->img = mlx_new_image(data->mlx, data->params->window_size.x,
 			data->params->window_size.y);
-	data->next_img = ft_calloc(1, sizeof(t_data));
-	data->next_img->img = mlx_new_image(data->mlx, data->params->window_size.x,
-			data->params->window_size.y);
 	data->win = mlx_new_window(data->mlx, data->params->window_size.x,
 			data->params->window_size.y, argv[1]);
-	data->img_index = 0;
 	update_img(data, data->params);
 	mlx_put_image_to_window(data->mlx, data->win, data->curr_img->img, 0, 0);
 	set_hooks(data);
@@ -43,9 +39,7 @@ void	update_img(t_imx *data, t_params *params)
 {
 	t_data	*img;
 	t_coor	current;
-	int		img_idx;
 
-	img_idx = data->img_index;
 	ft_printf("Loading image... ");
 	img = data->curr_img;
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,

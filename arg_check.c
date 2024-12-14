@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:14:11 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/12 11:39:21 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/14 16:48:03 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	arg_check(int argc, char *argv[])
 	{
 		if (!ft_isfloat(argv[i]))
 		{
-			ft_printf("Invalid arguments, exiting\n", argc);
+			ft_printf("\nInvalid arguments, exiting\n\n", argc);
 			print_help_exit();
 		}
 		i++;
@@ -39,13 +39,13 @@ void	arg_check(int argc, char *argv[])
 void	check_fract(char *arg_fract)
 {
 	if ((ft_strncmp(ft_str_upper(arg_fract), "MANDELBROT",
-				ft_max(ft_strlen(arg_fract), 11)) != 0)
+			ft_strlen(arg_fract)) != 0)
 		&& (ft_strncmp(ft_str_upper(arg_fract), "JULIA",
-				ft_max(ft_strlen(arg_fract), 6)) != 0)
+			ft_strlen(arg_fract)) != 0)
 		&& (ft_strncmp(ft_str_upper(arg_fract), "BURNING_SHIP",
-				ft_max(ft_strlen(arg_fract), 13)) != 0))
+			ft_strlen(arg_fract)) != 0))
 	{
-		ft_printf("Fractal type not recogonized, exiting\n");
+		ft_printf("\nFractal type not recogonized, exiting\n");
 		print_help_exit();
 	}
 	return ;
