@@ -1,0 +1,7 @@
+/*.py
+/*.o
+/*/*.o
+/*.a
+/.vscode/*
+/*.dysym/*
+/*.dysym/*.dysim/*
