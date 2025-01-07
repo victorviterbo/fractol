@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:42 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/12 11:45:26 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:47:18 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ typedef struct s_imx {
 	void		*win;
 	t_params	*params;
 	t_data		*curr_img;
-	t_data		*next_img;
-	int			img_index;
 }	t_imx;
 
 //main.c

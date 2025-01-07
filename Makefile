@@ -6,7 +6,7 @@
 #    By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/01 12:45:22 by vviterbo          #+#    #+#              #
-#    Updated: 2024/12/12 11:17:24 by vviterbo         ###   ########.fr        #
+#    Updated: 2024/12/12 15:00:42 by vviterbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJS = $(patsubst %.c, %.o, $(SRCS))
 
 CFLAGS = -Wall -Wextra -Werror
 
-CC = cc
+CC = cc 
 
 OS := $(shell uname)
 

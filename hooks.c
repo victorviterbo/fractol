@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:10:13 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/11 19:32:46 by vviterbo         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:46:46 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	key_hook(int keycode, t_imx *data)
 	else if (keycode == DOWN_ARROW)
 		update_range_shift(data, 3);
 	else if (keycode == ESC)
-		mlx_destroy_window(data->mlx, data->win);
+		free_all(data);
 	else
 		return (0);
 	update_img(data, data->params);
