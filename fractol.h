@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:42 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/12 14:47:18 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/01/13 15:40:53 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,6 @@ char		*ft_str_upper(char *str);
 int			free_all(t_imx *data);
 //arg_check.c
 void		arg_check(int argc, char *argv[]);
-void		check_fract(char *arg_fract);
+void		check_fract(int argc, char *arg_fract);
 
 #endif

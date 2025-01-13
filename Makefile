@@ -6,7 +6,7 @@
 #    By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/01 12:45:22 by vviterbo          #+#    #+#              #
-#    Updated: 2024/12/12 15:00:42 by vviterbo         ###   ########.fr        #
+#    Updated: 2025/01/13 15:29:25 by vviterbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS = main.c fractals.c hooks.c parsing.c utils.c utils_img.c arg_check.c
 
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 
 CC = cc 
 
