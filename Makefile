@@ -6,7 +6,7 @@
 #    By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/01 12:45:22 by vviterbo          #+#    #+#              #
-#    Updated: 2025/01/15 16:32:43 by vviterbo         ###   ########.fr        #
+#    Updated: 2025/01/15 16:38:43 by vviterbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ fclean : clean
 
 re : fclean all
 
-$(NAME): $(SRC)
+$(NAME): $(SRCS)
 	$(MAKE) -C libft/ all
 	$(MAKE) -C $(MLX_PATH) all
 	$(CC) $(CFLAGS) $(SRCS) $(INCLUDE) -o $(NAME)
