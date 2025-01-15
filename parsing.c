@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:39:09 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/12 14:52:38 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:24:13 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ void	print_help_exit(void)
 	ft_printf("Where\n");
 	ft_printf("- FT is the fractal to display (available MANDELBROT, ");
 	ft_printf("JULIA, BURNING_SHIP), parameter is not case-sensitive\n");
-	ft_printf("- nsteps is the number of iterations\n");
-	ft_printf(" to be performed per pixel");
+	ft_printf("- nsteps is the number of iterations");
+	ft_printf(" to be performed per pixel\n");
 	ft_printf("- winx, winy : horizontal and vertical size");
 	ft_printf(" of window (respectively, in pixels)\n");
 	ft_printf("- re_min, im_min : real and imaginary part ");
@@ -122,6 +122,6 @@ void	print_help_exit(void)
 	ft_printf("- c0x, c0y : ");
 	ft_printf("With Julia fractal only, the real and imaginary part ");
 	ft_printf("of the starting point\n");
-	ft_printf("Defaults are [100 600 400 -2.0 -1.0 1 1 [-0.4, 0.6]]\n");
+	ft_printf("Defaults are [20 800 800 -1.0 -1.0 1.0 1.0 [-0.4, 0.6]]\n");
 	exit(0);
 }

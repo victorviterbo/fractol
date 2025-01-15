@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:42 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/12 14:47:18 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:55:25 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "libft/libft.h"
 
 # define ARROW_SCALE 0.1
-# define ZOOM_SCALE 0.8
+# define ZOOM_SCALE 0.9
 
 # define MACOS 0
 # define LINUX 1

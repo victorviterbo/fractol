@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:10:02 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/12 14:46:59 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:56:39 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ char	*ft_str_upper(char *str)
 
 int	free_all(t_imx *data)
 {
-
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_image(data->mlx, data->curr_img->img);
 	free(data->curr_img);

@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:56:06 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/12 14:47:25 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/01/08 15:29:01 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char *argv[])
 	data->curr_img->img = mlx_new_image(data->mlx, data->params->window_size.x,
 			data->params->window_size.y);
 	data->win = mlx_new_window(data->mlx, data->params->window_size.x,
-			data->params->window_size.y, argv[1]);
+			data->params->window_size.y, "fractol");
 	update_img(data, data->params);
 	mlx_put_image_to_window(data->mlx, data->win, data->curr_img->img, 0, 0);
 	set_hooks(data);
