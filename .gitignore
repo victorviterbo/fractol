@@ -1,7 +1,10 @@
+./fractol.dSYM/*
+./fractol
 /*.py
 /*.o
 /*/*.o
 /*.a
+/*/*.a
 /.vscode/*
 /*.dysym/*
 /*.dysym/*.dysim/*

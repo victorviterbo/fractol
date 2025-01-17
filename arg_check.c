@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:14:11 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/01/13 15:39:48 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:54:01 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,18 @@ void	arg_check(int argc, char *argv[])
 void	check_fract(int argc, char *arg_fract)
 {
 	if ((ft_strncmp(ft_str_upper(arg_fract), "MANDELBROT",
-				ft_strlen(arg_fract)) == 0) && argc != 2 && argc != 9)
-	{
-		ft_printf("\nWrong number of argument for Mandelbrot, exiting\n");
-		print_help_exit();
-	}
+				ft_strlen(arg_fract)) == 0) && (argc == 2 || argc == 9))
+		return ;
 	else if ((ft_strncmp(ft_str_upper(arg_fract), "JULIA",
-				ft_strlen(arg_fract)) == 0) && argc != 2 && argc != 11)
-	{
-		ft_printf("\nWrong number of argument for Julia, exiting\n");
-		print_help_exit();
-	}
+				ft_strlen(arg_fract)) == 0) && (argc == 2 || argc == 11))
+		return ;
 	else if ((ft_strncmp(ft_str_upper(arg_fract), "BURNING_SHIP",
-				ft_strlen(arg_fract)) == 0) && argc != 2 && argc != 9)
-	{
-		ft_printf("\nWrong number of argument for Burning Ship, exiting\n");
-		print_help_exit();
-	}
+				ft_strlen(arg_fract)) == 0) && (argc == 2 || argc == 9))
+		return ;
 	else
 	{
-		ft_printf("\nFractal type not recogonized, exiting\n");
+		ft_printf("\nWrong number of argument for Fractal ");
+		ft_printf("or Fractal not recogonized. Exiting ...\n");
 		print_help_exit();
 	}
 	return ;
