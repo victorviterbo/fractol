@@ -6,7 +6,7 @@
 #    By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/01 12:45:22 by vviterbo          #+#    #+#              #
-#    Updated: 2025/01/13 15:29:25 by vviterbo         ###   ########.fr        #
+#    Updated: 2025/01/17 12:36:12 by vviterbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS = main.c fractals.c hooks.c parsing.c utils.c utils_img.c arg_check.c
 
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 CC = cc 
 
@@ -51,5 +51,5 @@ $(NAME):
 	$(MAKE) -C $(MLX_PATH) all
 	$(CC) $(CFLAGS) $(SRCS) $(INCLUDE) -o $(NAME)
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
 
