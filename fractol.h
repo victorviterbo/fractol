@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:42 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/01/15 16:26:03 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:38:44 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,17 @@ typedef struct s_imx {
 	t_data		*curr_img;
 }	t_imx;
 
-//main.c
-void		update_img(t_imx *data, t_params *params);
+//fractol.c
+t_imx	*ft_init_mlx(int argc, char *argv[]);
+void	update_img(t_imx *imx, t_params *params);
 //fractals.c
 double		madelbrot(t_coor c0, int nsteps);
 double		julia(t_coor xy, t_coor c0, int nsteps);
 double		burning_ship(t_coor xy, int nsteps);
 //hooks.c
-void		set_hooks(t_imx *data);
-int			key_hook(int keycode, t_imx *data);
-int			mouse_hook(int mousecode, int x, int y, t_imx *data);
+void		set_hooks(t_imx *imx);
+int			key_hook(int keycode, t_imx *imx);
+int			mouse_hook(int mousecode, int x, int y, t_imx *imx);
 //parsing.c
 t_params	*parse_params(int argc, char *argv[]);
 t_params	*set_params_mandelbrot(t_params *params, int argc, char *argv[]);
@@ -93,17 +94,17 @@ t_params	*set_params_julia(t_params *params, int argc, char *argv[]);
 t_params	*set_params_burning_ship(t_params *params, int argc, char *argv[]);
 void		print_help_exit(void);
 //utils_img.c
-int			free_all(t_imx *data);
-void		update_range_shift(t_imx *data, int dir);
-void		update_range_zoom(t_imx *data, int mousecode, t_coor mouse);
-void		set_pixel(t_coor pxl, t_imx *data, t_params *params);
+int			free_all(t_imx *imx);
+void		update_range_shift(t_imx *imx, int dir);
+void		update_range_zoom(t_imx *imx, int mousecode, t_coor mouse);
+void		set_pixel(t_coor pxl, t_imx *imx, t_params *params);
 int			map_colors(double color);
 //utils.c
 t_coor		scale_vector(t_coor base, t_coor tip, float scale);
 t_coor		pxl2pt(t_coor xy, t_params *params);
 t_coor		pt2pxl(t_coor xy, t_params *params);
 char		*ft_str_upper(char *str);
-int			free_all(t_imx *data);
+int			free_all(t_imx *imx);
 //arg_check.c
 void		arg_check(int argc, char *argv[]);
 void		check_fract(int argc, char *arg_fract);

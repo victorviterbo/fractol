@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:39:09 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/01/15 16:40:20 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:20:52 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_params	*parse_params(int argc, char *argv[])
 	t_params	*params;
 
 	params = ft_calloc(1, sizeof(t_params));
+	if (!params)
+		return (NULL);
 	params->c0 = ft_initvec(-0.4, 0.6, 0);
 	params->nsteps = 50;
 	params->window_size = ft_initvec(600, 400, 0);

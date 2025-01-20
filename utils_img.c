@@ -6,19 +6,19 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 21:41:43 by vviterbo          #+#    #+#             */
-/*   Updated: 2024/12/11 14:56:40 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:33:46 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		free_all(t_imx *data);
-void	update_range_shift(t_imx *data, int dir);
-void	update_range_zoom(t_imx *data, int mousecode, t_coor mouse);
-void	set_pixel(t_coor pxl, t_imx *data, t_params *params);
+int		free_all(t_imx *imx);
+void	update_range_shift(t_imx *imx, int dir);
+void	update_range_zoom(t_imx *imx, int mousecode, t_coor mouse);
+void	set_pixel(t_coor pxl, t_imx *imx, t_params *params);
 int		map_colors(double color);
 
-void	update_range_zoom(t_imx *data, int mousecode, t_coor mouse)
+void	update_range_zoom(t_imx *imx, int mousecode, t_coor mouse)
 {
 	float	scale;
 
@@ -29,34 +29,34 @@ void	update_range_zoom(t_imx *data, int mousecode, t_coor mouse)
 		scale = 1 / ZOOM_SCALE;
 	else
 		return ;
-	data->params->min = scale_vector(mouse, data->params->min, scale);
-	data->params->max = scale_vector(mouse, data->params->max, scale);
+	imx->params->min = scale_vector(mouse, imx->params->min, scale);
+	imx->params->max = scale_vector(mouse, imx->params->max, scale);
 	return ;
 }
 
-void	update_range_shift(t_imx *data, int dir)
+void	update_range_shift(t_imx *imx, int dir)
 {
 	t_coor	min;
 	t_coor	max;
 
-	min = data->params->min;
-	max = data->params->max;
+	min = imx->params->min;
+	max = imx->params->max;
 	if (dir < 2)
 	{
 		dir = 2 * dir - 1;
-		data->params->min.x = min.x + dir * ARROW_SCALE * (max.x - min.x);
-		data->params->max.x = max.x + dir * ARROW_SCALE * (max.x - min.x);
+		imx->params->min.x = min.x + dir * ARROW_SCALE * (max.x - min.x);
+		imx->params->max.x = max.x + dir * ARROW_SCALE * (max.x - min.x);
 	}
 	else
 	{
 		dir = 2 * (dir - 2) - 1;
-		data->params->min.y = min.y + dir * ARROW_SCALE * (max.y - min.y);
-		data->params->max.y = max.y + dir * ARROW_SCALE * (max.y - min.y);
+		imx->params->min.y = min.y + dir * ARROW_SCALE * (max.y - min.y);
+		imx->params->max.y = max.y + dir * ARROW_SCALE * (max.y - min.y);
 	}
 	return ;
 }
 
-void	set_pixel(t_coor pxl, t_imx *data, t_params *params)
+void	set_pixel(t_coor pxl, t_imx *imx, t_params *params)
 {
 	double	color;
 	char	*dst;
@@ -68,8 +68,8 @@ void	set_pixel(t_coor pxl, t_imx *data, t_params *params)
 		color = julia(pxl2pt(pxl, params), params->c0, params->nsteps);
 	else if (params->ft == BURNING_SHIP)
 		color = burning_ship(pxl2pt(pxl, params), params->nsteps);
-	dst = data->curr_img->addr + (int)(pxl.y * data->curr_img->line_length
-			+ pxl.x * (data->curr_img->bits_per_pixel / 8));
+	dst = imx->curr_img->addr + (int)(pxl.y * imx->curr_img->line_length
+			+ pxl.x * (imx->curr_img->bits_per_pixel / 8));
 	*(unsigned int *)dst = map_colors(color);
 	return ;
 }
