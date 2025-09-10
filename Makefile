@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+         #
+#    By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/01 12:45:22 by vviterbo          #+#    #+#              #
-#    Updated: 2025/01/17 18:18:34 by vviterbo         ###   ########.fr        #
+#    Updated: 2025/09/10 13:16:37 by victorviter      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,9 +43,10 @@ fclean : clean
 re : fclean all
 
 $(NAME): $(SRCS)
-	$(MAKE) -C libft/ all
-	$(MAKE) -C $(MLX_PATH) all
+	@$(MAKE) -C libft/ all
+	@$(MAKE) -C $(MLX_PATH) all
 	$(CC) $(CFLAGS) $(SRCS) $(INCLUDE) -o $(NAME)
+	@echo "$(NAME) compiled successfully"
 
 .PHONY: all clean fclean re
 

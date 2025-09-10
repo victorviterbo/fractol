@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:42 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/01/20 19:38:44 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/09/10 14:15:54 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <math.h>
 # include "minilibx_opengl/mlx.h"
+# include "minilibx-linux/mlx.h"
 # include "libft/libft.h"
 
 # define ARROW_SCALE 0.1
