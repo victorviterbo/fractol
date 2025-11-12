@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 14:06:40 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/12 15:22:36 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/11/12 16:54:09 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ double	burning_ship(t_coor xy, int nsteps)
 	}
 	if (i == nsteps)
 		return (1.0);
-	//i = i + 4 / (pow(xy.x, 2) + pow(xy.y, 2));
+	i = i + 4 / (pow(xy.x, 2) + pow(xy.y, 2));
 	return (i / (double)nsteps);
 }

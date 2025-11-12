@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 21:41:43 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/12 16:39:01 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/11/12 16:48:20 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,12 +151,12 @@ int	map_colors(t_imx *imx, double color)
 		if (color < 4)
 		{
 			r = 0;
-			g = (int)(color * 1.5f * 255);
-			b = (int)(color * 2.0f * 255);
+			g = (int)(color * 1.5 * 255);
+			b = (int)(color * 2.0 * 255);
 		}
 		else if (color < 0.7)
 		{
-			color = (color - 0.4f) / 0.3f;
+			color = (color - 0.4) / 0.3;
 			r = (int)(color * 0.8 * 255);
 			g = (int)((1.0 - color * 0.5) * 255);
 			b = 255;
@@ -172,6 +172,7 @@ int	map_colors(t_imx *imx, double color)
 	}
 	else
 	{
+		color = 1 - color;
 		r = (unsigned char)(255 * (1 - pow(color, 2)));
 		g = (unsigned char)(255 * pow(color, 0.5));
 		b = (unsigned char)(255 * pow(color, 1.5));

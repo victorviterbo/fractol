@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:42 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/12 16:24:06 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/11/12 16:45:26 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define ARROW_SCALE 0.1
 # define ZOOM_SCALE 0.9
-# define N_COLOR_SCHEME 5
+# define N_COLOR_SCHEME 6
 
 
 # define MACOS 0
