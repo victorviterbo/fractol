@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:39:09 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/01/20 19:20:52 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/11/12 15:49:03 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,15 @@ t_params	*set_params_mandelbrot(t_params *params, int argc, char *argv[])
 			(double)ft_atof(argv[4]), 0);
 	params->min = ft_initvec((double)ft_atof(argv[5]), (double)ft_atof(argv[6]),
 			0);
-	params->max = ft_initvec((double)ft_atof(argv[7]), (double)ft_atof(argv[8]),
-			0);
+	if (ft_strncmp(ft_str_upper(argv[8]), "AUTO", ft_strlen(argv[8])) == 0)
+	{
+		params->max = ft_initvec((double)ft_atof(argv[7]), 0, 0);
+		params->max.y = params->window_size.y * (params->max.x - params->min.x) / (params->window_size.x) + params->min.y;
+	}
+	else
+		params->max = ft_initvec((double)ft_atof(argv[7]), (double)ft_atof(argv[8]), 0);
+	if (argv[9])
+		params->coloring_scheme = ft_atoi(argv[9]) % N_COLOR_SCHEME;
 	return (params);
 }
 
@@ -68,10 +75,16 @@ t_params	*set_params_julia(t_params *params, int argc, char *argv[])
 			(double)ft_atof(argv[4]), 0);
 	params->min = ft_initvec((double)ft_atof(argv[5]), (double)ft_atof(argv[6]),
 			0);
-	params->max = ft_initvec((double)ft_atof(argv[7]), (double)ft_atof(argv[8]),
-			0);
-	params->c0 = ft_initvec((double)ft_atof(argv[9]), (double)ft_atof(argv[10]),
-			0);
+	if (ft_strncmp(ft_str_upper(argv[8]), "AUTO", ft_strlen(argv[8])) == 0)
+	{
+		params->max = ft_initvec((double)ft_atof(argv[7]), 0, 0);
+		params->max.y = params->window_size.y * (params->max.x - params->min.x) / (params->window_size.x) + params->min.y;
+	}
+	else
+		params->max = ft_initvec((double)ft_atof(argv[7]), (double)ft_atof(argv[8]), 0);
+	params->c0 = ft_initvec((double)ft_atof(argv[9]), (double)ft_atof(argv[10]), 0);
+	if (argv[11])
+		params->coloring_scheme = ft_atoi(argv[11]) % N_COLOR_SCHEME;
 	return (params);
 }
 
@@ -85,8 +98,15 @@ t_params	*set_params_burning_ship(t_params *params, int argc, char *argv[])
 			(double)ft_atof(argv[4]), 0);
 	params->min = ft_initvec((double)ft_atof(argv[5]), (double)ft_atof(argv[6]),
 			0);
-	params->max = ft_initvec((double)ft_atof(argv[7]), (double)ft_atof(argv[8]),
-			0);
+	if (ft_strncmp(ft_str_upper(argv[8]), "AUTO", ft_strlen(argv[8])) == 0)
+	{
+		params->max = ft_initvec((double)ft_atof(argv[7]), 0, 0);
+		params->max.y = params->window_size.y * (params->max.x - params->min.x) / (params->window_size.x) + params->min.y;
+	}
+	else
+		params->max = ft_initvec((double)ft_atof(argv[7]), (double)ft_atof(argv[8]),0);
+	if (argv[9])
+		params->coloring_scheme = ft_atoi(argv[9]) % N_COLOR_SCHEME;
 	return (params);
 }
 
@@ -94,7 +114,7 @@ void	print_help_exit(void)
 {
 	ft_printf("Please provide correct input:\n");
 	ft_printf("./fractol FT [nsteps winx winy re_min im_min ");
-	ft_printf("re_max im_max [re_c0 im_c0]]\n");
+	ft_printf("re_max im_max [re_c0 im_c0] [color]]\n");
 	ft_printf("Where\n");
 	ft_printf("- FT is the fractal to display (available MANDELBROT, ");
 	ft_printf("JULIA, BURNING_SHIP), parameter is not case-sensitive\n");
@@ -109,6 +129,7 @@ void	print_help_exit(void)
 	ft_printf("- c0x, c0y : ");
 	ft_printf("With Julia fractal only, the real and imaginary part ");
 	ft_printf("of the starting point\n");
-	ft_printf("Defaults are [20 800 800 -1.0 -1.0 1.0 1.0 [-0.4, 0.6]]\n");
+	ft_printf("optional: coloring scheme as int [0:%i]\n", N_COLOR_SCHEME);
+	ft_printf("Defaults are [20 800 800 -1.0 -1.0 1.0 1.0 [-0.4, 0.6] [0]]\n");
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:42 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/09/10 14:15:54 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/11/12 16:24:06 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,13 @@
 # include "minilibx-linux/mlx.h"
 # include "libft/libft.h"
 
+
+#include <stdio.h>
+
 # define ARROW_SCALE 0.1
 # define ZOOM_SCALE 0.9
+# define N_COLOR_SCHEME 5
+
 
 # define MACOS 0
 # define LINUX 1
@@ -35,6 +40,8 @@
 #  define ZOOM_IN 4
 #  define ZOOM_OUT 5
 # elif defined __APPLE__
+#  define C_KEY 8
+#  define I_KEY 34
 #  define LEFT_ARROW 123
 #  define RIGHT_ARROW 124
 #  define UP_ARROW 126
@@ -44,7 +51,6 @@
 #  define RIGHT_CLICK 2
 #  define ZOOM_IN 4
 #  define ZOOM_OUT 5
-
 # endif
 
 enum e_FRACTYPE {
@@ -68,6 +74,7 @@ typedef struct s_params {
 	int		nsteps;
 	int		ft;
 	t_coor	c0;
+	int		coloring_scheme;
 }	t_params;
 
 typedef struct s_imx {
@@ -99,13 +106,14 @@ int			free_all(t_imx *imx);
 void		update_range_shift(t_imx *imx, int dir);
 void		update_range_zoom(t_imx *imx, int mousecode, t_coor mouse);
 void		set_pixel(t_coor pxl, t_imx *imx, t_params *params);
-int			map_colors(double color);
+int			map_colors(t_imx *imx, double color);
 //utils.c
 t_coor		scale_vector(t_coor base, t_coor tip, float scale);
 t_coor		pxl2pt(t_coor xy, t_params *params);
 t_coor		pt2pxl(t_coor xy, t_params *params);
 char		*ft_str_upper(char *str);
 int			free_all(t_imx *imx);
+int			print_params(t_imx *imx);
 //arg_check.c
 void		arg_check(int argc, char *argv[]);
 void		check_fract(int argc, char *arg_fract);
