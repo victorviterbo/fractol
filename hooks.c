@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:10:13 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/12 12:30:05 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/11/13 10:27:40 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	key_hook(int keycode, t_imx *imx)
 		update_range_shift(imx, 0);
 	else if (keycode == RIGHT_ARROW)
 		update_range_shift(imx, 1);
-	else if (keycode == UP_ARROW)
-		update_range_shift(imx, 2);
 	else if (keycode == DOWN_ARROW)
+		update_range_shift(imx, 2);
+	else if (keycode == UP_ARROW)
 		update_range_shift(imx, 3);
 	else if (keycode == ESC)
 		free_all(imx);
