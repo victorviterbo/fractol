@@ -33,6 +33,6 @@ Defaults are 20 800 800 -1.0 -1.0 1.0 1.0 [-0.4, 0.6] [0]
 
 If you do not feel like doing math, you can replace \<im_max\> with **auto** to ensure that proprtions are kept
           
-# Available fractals: mandelbrot, julia, burningship
+### Available fractals: mandelbrot, julia, burningship
 
 for Julia, you can specify the seed used by adding it's real followed by its imaginary part at the end of the arguments
