@@ -6,7 +6,7 @@ A beautiful and interactive fractal explorer written in C using the MinilibX gra
 - Renders multiple fractal sets (Mandelbrot, Julia, Burning Ship)
 - Smooth (de)zooming with mouse and panning with keyboard controls
 - Real-time parameter adjustments
-- Interactive Julia set with mouse movement
+- Interactive Julia set with mouse left-click
 
 ## 🕹️ Controls
 - **Mouse Wheel**: Zoom in/out
