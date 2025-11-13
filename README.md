@@ -16,7 +16,20 @@ A beautiful and interactive fractal explorer written in C using the MinilibX gra
 ## 🚀 Usage
 
 make
-./fractol [fractal_name] [number of steps] [window width] [window height] [window height] [min real at init] [min real imaginary at init] [max real at init] [max real imaginary at init]
+./fractol FT [nsteps winx winy re_min im_min re_max im_max [re_c0 im_c0] [color]]
+Where
+- FT is the fractal to display (available MANDELBROT, JULIA, BURNING_SHIP), parameter is not case-sensitive
+- nsteps is the number of iterations to be performed per pixel
+- winx, winy : horizontal and vertical size of window (respectively, in pixels)
+- re_min, im_min : real and imaginary part of the bottom left corner
+- re_max, im_max : real and imaginary part of the top right corner
+- c0x, c0y : With Julia fractal only, the real and imaginary part of the starting point
+- color: coloring scheme option passed as an int [0:6]
+
+Defaults are 20 800 800 -1.0 -1.0 1.0 1.0 [-0.4, 0.6] [0]
+
+
+          
 # Available fractals: mandelbrot, julia, burningship
 
 for Julia, you can specify the seed used by adding it's real followed by its imaginary part at the end of the arguments
