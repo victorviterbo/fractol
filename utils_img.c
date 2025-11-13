@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 21:41:43 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/13 10:28:14 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/11/13 12:42:58 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	set_pixel(t_coor pxl, t_imx *imx, t_params *params)
 		color = julia(pxl2pt(pxl, params), params->c0, params->nsteps);
 	else if (params->ft == BURNING_SHIP)
 		color = burning_ship(pxl2pt(pxl, params), params->nsteps);
-	pxl.y = imx->params->window_size.y - pxl.y;
 	dst = imx->curr_img->addr + (int)(pxl.y * imx->curr_img->line_length
 			+ pxl.x * (imx->curr_img->bits_per_pixel / 8));
 	*(unsigned int *)dst = map_colors(imx, color);
