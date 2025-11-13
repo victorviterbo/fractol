@@ -11,7 +11,10 @@ A beautiful and interactive fractal explorer written in C using the MinilibX gra
 ## 🕹️ Controls
 - **Mouse Wheel**: Zoom in/out
 - **Arrow Keys**: Pan around the fractal
+- **c**: Change the coloring scheme
+- **i**: print informations about currently displayed in the terminal for reproductibility
 - **ESC**: Exit program
+- **Left Click**: For julia : set C0 to the values of the coordinates clikced
 
 ## 🚀 Usage
 
@@ -28,7 +31,7 @@ Where
 
 Defaults are 20 800 800 -1.0 -1.0 1.0 1.0 [-0.4, 0.6] [0]
 
-
+If you do not feel like doing math, you can replace \<im_max\> with **auto** to ensure that proprtions are kept
           
 # Available fractals: mandelbrot, julia, burningship
 
