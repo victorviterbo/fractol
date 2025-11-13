@@ -14,7 +14,7 @@ A beautiful and interactive fractal explorer written in C using the MinilibX gra
 - **c**: Change the coloring scheme
 - **i**: print informations about currently displayed fractal in the terminal for reproductibility
 - **ESC**: Exit program
-- **Left Click**: For julia : set C0 to the values of the coordinates clikced
+- **Left Click**: For julia : set the constant (C0) to the values of the coordinates clikced
 
 ## 🚀 Usage
 
@@ -35,4 +35,4 @@ If you do not feel like doing math, you can replace \<im_max\> with **auto** to 
           
 ### Available fractals: mandelbrot, julia, burningship
 
-for Julia, you can specify the seed used by adding it's real followed by its imaginary part at the end of the arguments
+for Julia, you can specify the constant (c0) used by adding it's real followed by its imaginary part at the end of the arguments
