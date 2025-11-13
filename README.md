@@ -24,7 +24,8 @@ Where
 - re_min, im_min : real and imaginary part of the bottom left corner
 - re_max, im_max : real and imaginary part of the top right corner
 - c0x, c0y : With Julia fractal only, the real and imaginary part of the starting point
-optional: coloring scheme as int [0:6]
+- color: coloring scheme option passed as an int [0:6]
+
 Defaults are [20 800 800 -1.0 -1.0 1.0 1.0 [-0.4, 0.6] [0]]
 
 
