@@ -12,7 +12,7 @@ A beautiful and interactive fractal explorer written in C using the MinilibX gra
 - **Mouse Wheel**: Zoom in/out
 - **Arrow Keys**: Pan around the fractal
 - **c**: Change the coloring scheme
-- **i**: print informations about currently displayed in the terminal for reproductibility
+- **i**: print informations about currently displayed fractal in the terminal for reproductibility
 - **ESC**: Exit program
 - **Left Click**: For julia : set C0 to the values of the coordinates clikced
 
