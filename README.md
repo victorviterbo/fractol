@@ -16,12 +16,12 @@ A beautiful and interactive fractal explorer written in C using the MinilibX gra
 ## 🚀 Usage
 
 make
-./fractol <fractal_name> \
-          <number of steps> \
-          <window width> <window height> \
-          <min real display> <min imaginary display> \
-          <max real display> <max imaginary display> \
-          [<c0x> <c0y>] \
+./fractol \<fractal_name\> \
+          \<number of steps\> \
+          \<window width\> <window height> \
+          \<min real display> <min imaginary display> \
+          \<max real display> <max imaginary display> \
+          [\<c0x\> \<c0y\>] \
           <coloring_scheme>
           
 # Available fractals: mandelbrot, julia, burningship
